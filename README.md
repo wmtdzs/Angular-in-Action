@@ -1,5 +1,6 @@
 # Angular-in-Action
-Angular in action project
+Angular in action project<br>
+这只是一个个人练习
 # 创建项目
 1. git clone git@github.com:wmtdzs/Angular-in-Action.git // 克隆项目<br>
 2. cd Angular-in-Action // 进入项目<br>
