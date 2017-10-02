@@ -1,0 +1,13 @@
+2.1.1 Angular表达式与JavaScript表达式的区别
+* Angular中所有表达式的值都来源于$scope对象，由该对象以添加属性的方式统一进行设置
+  并不像传统的JavaScript中，可以由全局的Window对象来调用表达式
+* Angular中表达式的容错能力很强，可以允许值出现null和undefined情况，而不会像在传统
+  JavaScript中那样抛出错误
+* 由于Angular中表达式的值来源固定，因此，在表达式中，不允许出现各类判断和循环语句
+  这一点也与传统JavaScript区别较大
+* Angular中表达式的值可以是使用管道符“|”进行格式化显示的数值，这也是区别于传统
+  JavaScript中表达式的一个明显特征
+
+Angular和JavaScript两者间的表达式可以相互调用，
+若在Angular中的表达式调用JavaScript代码，则需要在控制器中定义一个方法，在表达式中调用即可
+若在JavaScript中执行Angular表达式，则需要借助$eval()方法

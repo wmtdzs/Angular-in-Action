@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>控制元素的隐藏与显示状态</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <div ng-show="{{isShow}}">冯源</div>
+        <div ng-hide="{{isHide}}">fengyuan@163.com</div>
+        <!--
+            on值绑定了$scope.switch属性值
+            因为$scope.switch的值为3，所以显示ng-switch-default属性所在的元素
+        -->
+        <ul ng-switch on="{{switch}}">
+            <li ng-switch-when="1">冯源</li>
+            <li ng-switch-when="2">fengyuan@163.com</li>
+            <li ng-switch-default>更多...</li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+            $scope.isShow = true;
+            $scope.isHide = true;
+            $scope.switch = 3;
+        }]);
+
+    </script>
+</body>
+</html>

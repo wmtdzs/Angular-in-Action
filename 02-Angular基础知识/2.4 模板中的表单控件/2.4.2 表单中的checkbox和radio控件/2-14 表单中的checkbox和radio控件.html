@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>表单中的checkbox和radio控件</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        div {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <form name="temp_form" ng-submit="save()" ng-controller="ctrl">
+        <div>
+            <!--
+                注意：
+                如果ng-true-value和ng-false-value中的值是字符串，则必须加上单引号
+                否则会报错和失效
+
+                checkbox和radio中的ng-model绑定的值和控件初始值决定了控件初始状态
+                $scope.a = '同意'和checkbox中的ng-true-value属性值相同，则checkbox被选中
+                $scope.b = '男';和radio中的value属性值相同，则radio被选中
+
+            -->
+            <input type="checkbox" ng-model="a" ng-true-value="'同意'" ng-false-value="'不同意'"/>{{a}}
+        </div>
+        <div>
+            性别：
+            <input type="radio" ng-model="b" value="男"/>男
+            <input type="radio" ng-model="b" value="女"/>女
+        </div>
+        <input type="submit" value="提交"/>
+        {{ c }}
+    </form>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+            $scope.a = '同意';
+            $scope.b = '男';
+
+            $scope.save = function() {
+                $scope.c = "您选择的是：" + $scope.a + "和" + $scope.b;
+            }
+        }]);
+
+    </script>
+</body>
+</html>

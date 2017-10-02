@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>推断式注入的示例</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <input type="button" id="btnAlert" value="弹出对话框" ng-click="onClick('我是一个弹出对话框')"/>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+
+        app.factory('$show', function($window) {
+            return {
+                show : function(text) {
+                    $window.alert(text);
+                }
+            }
+        });
+
+        function ctrl($scope, $show) {
+            $scope.onClick = function(text) {
+                $show.show(text);
+            }
+        }
+
+        /*
+            在编写控制器代码时，由于在注入服务过程中，没有使用[]或
+            进行标记式声明，因此，注入器(injector)通过参数的名称来
+            推断依赖服务与控制器的关系。
+            Angular将会自动通过annotate函数提取实例化参数时传递来的列表，
+            并最终通过注入器(injector)将这些列表注入控制器中。
+            这种注入方式不需要关注注入时参数的先后顺序，Angular会根据
+            依赖的程度自动处理，由于Angular需要根据参数列表分析注入服务，
+            因此，这种注入的方式不能处理压缩或混淆后的代码，只能处理
+            原始的代码。
+        * */
+        app.controller('ctrl', ctrl);
+    </script>
+</body>
+</html>

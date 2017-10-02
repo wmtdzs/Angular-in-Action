@@ -1,0 +1,6 @@
+在Angular中，可以通过“ng-show”、“ng-hide”、“ng-switch”指令来控制元素隐藏与显示的状态，
+前两个指令直接控制元素的显示和隐藏状态，当“ng-show”值为true或“ng-hide”值为false时，元素显示，反之隐藏。
+
+“ng-switch”指令的功能是显示匹配成功的元素，该指令需要结合“ng-switch-when”和“ng-switch-default”指令使用，
+在“ng-switch”指令中，当指定的“on”值与某个或多个添加“ng-switch-when”指令的元素匹配时，这些元素显示，
+其他未匹配的元素则隐藏，若未找到与“on”值相匹配的元素时，则显示添加了“ng-switch-default”指令的元素

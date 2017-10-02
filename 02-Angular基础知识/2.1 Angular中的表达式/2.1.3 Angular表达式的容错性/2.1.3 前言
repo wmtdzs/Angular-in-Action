@@ -1,0 +1,2 @@
+Angular允许表达式的值为null或undefined类型
+而在传统JavaScript表达式中，若出现这两种类型，则会抛出ReferenceError类型的错误提示

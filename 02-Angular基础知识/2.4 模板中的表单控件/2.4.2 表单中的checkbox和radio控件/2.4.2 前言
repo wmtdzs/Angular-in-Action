@@ -1,0 +1,5 @@
+在表单控件中，checkbox和raido控件与<input>元素的其他类型控件不同，
+这两个控件不具有Angular的控件验证功能，且checkbox有选中和非选中两种状态，
+而radio只有一种选中状态。
+checkbox和radio控件都可以通过ng-model指令绑定控制器的属性，一旦绑定完成，
+在首次加载时，将以绑定的属性值作为控件初始化的状态

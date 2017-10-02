@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular的容错性</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <!--
+            页面上绑定了一个未定义的Angular表达式，因具有良好的容错性
+            允许使用未定义或空值表达式，因此，在未点击按钮时，控制台没有异常
+
+            当点击按钮时，执行error函数，在函数中将一个未定义的变量tmp输出至控制台
+            是以抛出异常信息
+        -->
+        <span>{{tmp}}</span>
+        <button ng-click="error()">单击</button>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+        $scope.temp = 'Angular';
+        $scope.error = function() {
+            console.log(tmp);
+        }
+    }]);
+
+</script>
+</body>
+</html>

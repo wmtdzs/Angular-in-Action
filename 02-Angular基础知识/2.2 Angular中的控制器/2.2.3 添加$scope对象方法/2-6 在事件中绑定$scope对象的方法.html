@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>在事件中绑定$scope对象的方法</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <span class="show">{{text}}</span>
+        <!--
+            通过ng-click绑定函数，重置$scope.text属性
+        -->
+        <input type="button" id="btnShow" ng-click="click_show()" value="显示"/>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+        $scope.text = 'Hello Angular!';
+
+        $scope.click_show = function() {
+            $scope.text = '单击后现实的内容';
+        };
+    }]);
+
+</script>
+</body>
+</html>

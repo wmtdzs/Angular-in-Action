@@ -1,0 +1,4 @@
+为了更好的运用Angular中的服务功能，开发者可以自定义符合应用本身业务逻辑的服务。
+定义服务的方法非常简单，主要包含以下两种：
+* 使用内置的$provider服务
+* 调用(Module)中的服务注册方法，如factory，service，constant，value等

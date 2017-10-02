@@ -1,0 +1,38 @@
+添加元素样式的方式
+* 直接绑定值为CSS类别名称的$scope对象属性
+  这种方式的操作非常简单，先在控制器中添加一个值为CSS类别名称的属性，
+  然后再页面元素的class或ng-class属性值中，通过双花括号方式绑定属性名即可
+  例：
+    // 在控制器中添加red属性，对应一个css属性名
+    $scope.red = 'red';
+    // 在页面中的元素中添加属性
+    <div class="{{red}}"></div> 或者 <div ng-class="{{red}}"></div>
+  这种方式虽然简单，但并不提倡，应尽量保证控制器代码都是处理逻辑业务的，并不涉及页面元素
+
+* 以字符串数组方式选择性添加CSS类别名称
+  这种方式根据控制器中一个布尔类型的属性值来决定页面中元素添加的CSS样式名，
+  当该属性为true时，添加一个CSS样式名，为false时添加另外一个CSS样式名
+  例：
+    // 在控制器中添加一个布尔类型的属性
+    $scope.blnfocus = true;
+    // 在页面元素中添加ng-class属性，并在其中通过字符串数组方式来添加CSS类别
+    <div ng-class="{true : red, false : green}[blnfocus]"></div>
+    //上面的CSS样式名，取决于blnfocus属性的值，值为true添加red样式，值为false添加green样式
+  这种方式只能在两种样式中选择一种，并且{}和[]顺序不可逆
+  在{}中设置可选择的两种属性，在[]中放置控制样式的属性名
+
+* 通过key/value对象方式添加多个CSS类别名称
+  它可以根据控制显示样式的属性值添加多个样式名
+  例：
+    // 在控制器中添加两个布尔类型的属性
+    $scope.a = false;
+    $scope.b = true;
+    $scope.c = false;
+    // 在页面元素中添加ng-class属性，在设置属性值时，通过定义key/value对象的方式来添加多个CSS样式名
+    <div ng-class="{{'red' : a, 'green' : b, 'blue' : c}}"></div>
+    // red、green、blue为key值，a、b、c为value值
+    // 当value值为true时，则添加对应的key值，即CSS样式名
+  这种方式可以实现添加多种CSS样式名称，适合在处理复杂样式时使用
+
+此外，在Angular中，还有另外两种用于添加样式的页面指令，分别为“ng-class-odd”和“ng-class-even”，
+这两个指令是专用于列表方式显示的数据，对应奇数行和偶数行的样式

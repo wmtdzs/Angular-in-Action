@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>使用$provide自定义服务</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="ctrl">
+    <div class="show">
+        服务返回的值
+        <span>{{info('name')}}</span>
+        <span>{{info('sex')}}</span>
+        <span>{{info('score')}}</span>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    angular.module('app', [], ['$provide', function($provide) {
+        $provide.factory('$output', [function() {
+            var stu = {
+                name: '张三',
+                sex: '男',
+                score: '60'
+            };
+            return stu;
+        }]);
+    }])
+            // 当通过依赖注入的方式向控制器添加自定义服务时，这个服务已经是一个实例化后的服务对象
+            .controller('ctrl', ['$scope', '$output', function($scope, $output) {
+                $scope.info = function(param) {
+                    for (var item in $output) {
+                        if (item == param) {
+                            return $output[item];
+                        }
+                    }
+                };
+            }]);
+
+</script>
+</body>
+</html>

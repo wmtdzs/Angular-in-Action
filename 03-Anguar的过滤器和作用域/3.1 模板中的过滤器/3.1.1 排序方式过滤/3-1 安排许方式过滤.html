@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>按排序方式过滤</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        ul {
+            list-style-type: none;
+            width: 408px;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            float: left;
+            padding: 5px 0;
+        }
+        ul .odd {
+            color: #0026ff;
+        }
+        ul .even {
+            color: #FF0000;
+        }
+        ul .bold {
+            font-weight: bold;
+        }
+        ul li span {
+            width: 52px;
+            float: left;
+            padding: 0 10px;
+        }
+        ul .focus {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>年龄</span>
+                <span>分数</span>
+            </li>
+            <!--
+                ng-class-odd和ng-class-even，值若是字符串，需要加引号
+                orderBy，以冒号后的属性名称进行排序，score为属性名称，默认为升序排序，加“-”号为降序
+                limitTo，用于设置数据显示时的记录总量，具体总量通过冒号后的参数决定，本例为3，只显示3条
+            -->
+            <li ng-repeat="stu in data | orderBy: '-score' | limitTo: 3"
+                ng-class-odd="'odd'"
+                ng-class-even="'even'"
+                ng-click="li_click($index)"
+                ng-class="{focus : $index == focus}">
+                <span>{{$index + 1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.age}}</span>
+                <span>{{stu.score}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+
+            $scope.bold = 'bold';
+
+            $scope.data = [
+                { name : '张明明', sex : '女', age : 24, score : 95},
+                { name : '李清思', sex : '女', age : 27, score : 87},
+                { name : '刘小华', sex : '男', age : 28, score : 86},
+                { name : '陈忠忠', sex : '男', age : 23, score : 97}
+            ];
+
+        }]);
+
+    </script>
+</body>
+</html>

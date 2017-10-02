@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>has和get方法的示例</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <!-- 视图组件 -->
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module('app', [])
+                .factory('$custom', function() {
+                    return {
+                        print : function(message) {
+                            console.log(message);
+                        }
+                    }
+                });
+
+        var injector = angular.injector(['app', 'ng']);
+        /*
+            has变量为true说明服务注册列表中包含$custom服务，
+            这是由于在开始检测之前，我们就已经定义了一个名为
+            $custom的服务
+        * */
+        var has = injector.has('$custom');
+        console.log(has);
+
+        if (has) {
+            var custom = injector.get('$custom');
+            custom.print('控制台输出任意的内容');
+        }
+
+        app.controller('ctrl', ['$scope', '$custom', function($scope, $custom) {
+            // 控制器代码
+        }]);
+    </script>
+</body>
+</html>

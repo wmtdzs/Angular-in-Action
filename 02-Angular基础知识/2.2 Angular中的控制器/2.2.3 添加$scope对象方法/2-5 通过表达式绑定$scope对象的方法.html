@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>通过表达式绑定$scope对象的方法</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <!--
+            在双花括号中直接调用方法，该方法重置了$scope.text的属性值并返回
+        -->
+        <span class="show">{{ span_show() }}</span>
+    </div>
+
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+        $scope.text = 'Hello Angular!';
+
+        $scope.span_show = function() {
+            $scope.text = '欢迎来到Angular的精彩世界';
+            return $scope.text;
+        }
+    }]);
+
+</script>
+</body>
+</html>

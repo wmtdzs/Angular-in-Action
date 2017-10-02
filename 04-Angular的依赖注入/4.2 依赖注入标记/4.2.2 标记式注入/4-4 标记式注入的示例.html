@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>标记式注入的示例</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <div class="show">{{text}}</div>
+        <input type="button" id="btnShow" value="弹出" ng-click="onShow('弹出一个对话框')"/>
+        <input type="button" id="btnWrite" value="显示" ng-click="onWrite('今天天气有点儿冷啊')"/>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        var ctrl = function($scope, $show, $write) {
+
+            $scope.onShow = function(text) {
+                $show.show(text);
+            }
+
+            $scope.onWrite = function(text) {
+                $scope.text = $write.write(text);
+            }
+
+        };
+
+        /*
+            控制器函数ctrl，通过调用$injector属性，向函数中注入了3个
+            名为“$scope、$show、$write”的服务，注入的服务名和顺序
+            必须与函数在构造时的参数名和顺序完全一样，否则，将在执行
+            服务函数时报错。
+
+            由于服务名和函数参数名的顺序的一一对应关系，使得服务名与
+            函数体绑定在一起。因此，这种标记式的注入声明可以在压缩或
+            混淆后的代码中执行，因为代码虽然压缩或混淆了，但它们之间
+            的对应关系依然是存在的。
+        * */
+        ctrl.$inject = ['$scope', '$show', '$write'];
+
+        angular.module('app', [])
+                .controller('ctrl', ctrl)
+                .factory('$show', ['$window', function($window) {
+                    return {
+                        show : function(text) {
+                            $window.alert(text);
+                        }
+                    }
+                }])
+                .factory('$write', function() {
+                    return {
+                        write : function(text) {
+                            return text;
+                        }
+                    }
+                });
+    </script>
+</body>
+</html>

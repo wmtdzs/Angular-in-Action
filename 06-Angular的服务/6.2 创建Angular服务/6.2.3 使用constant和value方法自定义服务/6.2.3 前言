@@ -1,0 +1,19 @@
+constant和value方法，它们创建的服务常用来返回一个常量
+
+constant方法调用格式：
+app.constant(name, value);
+app为已构建的模块变量，参数name表示创建服务的名称，value是一个常量，
+表示与服务名对应的常量值或对象，当注入该服务后，可以直接调用服务名
+对应的常量
+
+value方法调用格式：
+app.value(name, value);
+上述代码与constant方法基本相同
+
+使用constant和value方法创建服务并注入控制器后，都可以通过angular.extend()
+方法对服务返回的常量进行重置，但两者之间是有区别的：
+*使用constant方法创建服务返回的常量可以被注入配置函数(config)中
+*使用value方法创建的服务不可以被注入到配置函数(config)中
+
+因此，constant方法常用于创建配置数据，而value方法则常用于创建对象和函数。
+这两个方法与之前的factory和service在大部分功能上是可以替换的

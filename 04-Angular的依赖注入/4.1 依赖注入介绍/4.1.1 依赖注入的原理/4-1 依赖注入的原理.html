@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>依赖注入的原理</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            border: 1px solid #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <div class="{{cls}}">{{show}}</div>
+        <button ng-click="onClick()">点我</button>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+
+        /*
+            本例并未调用控制器模块进行代码编写，而是调用config函数进行服务的注册
+            这是因为在实际代码执行过程中，以下两段代码的功能是相同的
+            第一段：
+            app.controller('ctrl', function($scope){
+                // 控制器代码
+            });
+            第二段：
+            app.config(function($controllerProvider) {
+                $controllerProvider.register('ctrl', function($scope) {
+                    // 控制器代码
+                });
+            });
+            在Angular中，可以通过模块中的config函数来声明需要注入的对象，而声明的方式是通过
+            调用provider服务。但在Angular内部，controller控制器并不是由provider服务来创建的，
+            而是由controllerProvider服务创建的。
+            因此，当用户在创建一个控制器时，实际上是在config函数中调用controllerProvider服务的register方法，
+            完成一个控制器的创建，当控制器创建完成后，则再调用injector注入器完成各个依赖对象的注入
+        * */
+        app.config(function($controllerProvider) {
+            $controllerProvider.register('ctrl', ['$scope', function($scope) {
+                $scope.cls = '';
+                $scope.onClick = function() {
+                    $scope.cls = 'show';
+                    $scope.show = '点击后显示的内容';
+                }
+            }]);
+        });
+    </script>
+</body>
+</html>

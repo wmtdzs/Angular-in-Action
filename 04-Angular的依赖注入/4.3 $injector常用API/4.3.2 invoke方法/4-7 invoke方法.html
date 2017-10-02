@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>invoke方法</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <!-- 视图组件 -->
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module('app', [])
+                .factory('$custom', function() {
+                   return {
+                       print : function(text) {
+                           console.log(text);
+                       }
+                   }
+                });
+
+        var fun = function($custom) {
+            $custom.print('函数代码执行成功');
+        }
+
+        var injector = angular.injector(['app', 'ng']);
+        injector.invoke(fun); // invoke还有两个参数，如何使用？
+
+        app.controller('ctrl', ['$scope', '$custom', function($scope, $custom) {
+            // 控制器代码
+        }]);
+
+    </script>
+</body>
+</html>

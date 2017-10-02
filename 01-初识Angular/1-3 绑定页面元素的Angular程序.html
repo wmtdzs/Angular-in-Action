@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>一个绑定页面元素的Angular程序</title>
+</head>
+<body>
+    <h3>请在下列文本框中输入任意内容</h3>
+    <!--
+        ng-controller属性，用来声明Angular中控制器类的名称
+        且这个被声明的类将管理<div>中的全部元素
+    -->
+    <div ng-controller="userController">
+        <!--
+            ng-model属性，绑定逻辑层中的user.name数据
+            并同时通过双花括号向页面中的另外一个<div>元素插入相同的user.name内容
+            使用ng-model方式绑定数据是双向变化的，若数据源改变，被绑定的元素内容也会自动同步变化，反之亦然
+            
+        -->
+        <input id="Text1" type="text" ng-model="user.name"/>
+        <div>{{ user.name }}</div>
+    </div>
+    <script type="text/javascript" src="../JS/angular.min.js"></script>
+    <script>
+        // 注意此处，在AngularJS 1.3版本以前，可以直接用声明方法作为控制器
+        // 此处使用的AngularJS为1.5版本，不支持全局controller的语法
+        /*function userController($scope) {
+            $scope.user = {name : ''};
+        }*/
+        angular.module('app',[]).controller('userController', ['$scope', function($scope) {
+            $scope.user = { name : '' };
+        }]);
+    </script>
+</body>
+</html>

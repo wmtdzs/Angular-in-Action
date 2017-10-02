@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>行内式注入</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <div class="show">{{text}}</div>
+        <input type="button" id="btnSum" value="求和" ng-click="onClick(5, 10)"/>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        /*
+            首先定义了一个sum服务，在其中定义了一个add方法，用来计算两个参数的和，
+            在构建控制器对象的过程中，采用行内注入声明的方式，将定义好的“$sum”服务
+            注入控制器对象中。同时，在注入的函数中声明服务名一一对应的参数，以用于
+            函数体内部的调用，由于这种方式仍然是分析并处理注入字符数组中的内容，因此
+            即使是压缩或混淆后的代码，这种方式仍然可以使用
+        * */
+        angular.module('app', [])
+                .factory('$sum', function() {
+                    return {
+                        add : function(m, n) {
+                            return m + n;
+                        }
+                    }
+                })
+                .controller('ctrl', ['$scope', '$sum', function($scope, $sum) {
+
+                    $scope.onClick = function(m, n) {
+                        $scope.text = m + '+' + n + '=' + $sum.add(m, n);
+                    };
+
+                }]);
+
+    </script>
+</body>
+</html>

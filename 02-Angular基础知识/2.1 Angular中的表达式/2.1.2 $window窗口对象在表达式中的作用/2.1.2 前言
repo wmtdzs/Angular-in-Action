@@ -1,0 +1,7 @@
+若在控制器中调用JavaScript代码中的全局对象window
+需要通过以来注入的$window对象来替代window
+
+若是window.alert()，则需要修改为$window.alert()
+每一个控制器的代码只是在它管辖的作用域中使用
+
+通过这样的写法，可以防止它与全局的window对象混淆，出现各类诡异的异常

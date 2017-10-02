@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>添加元素样式</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        ul {
+            list-style-type: none;
+            width: 400px;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            float: left;
+            padding: 5px 0;
+        }
+        ul li span {
+            width: 50px;
+            float: left;
+            padding: 0 10px;
+        }
+        ul .odd {
+            color: #0026ff;
+        }
+        ul .even {
+            color: #ff0000;
+        }
+        ul .bold {
+            font-weight: bold;
+        }
+        ul .focus {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>是否首条</span>
+                <span>是否尾条</span>
+            </li>
+            <!--
+                当点击li时，触发li_click函数，此函数作用就是将index赋值给$scope.focus属性
+                当$scope.focus属性和index相等，即为true时，使用定义好的.focus样式名作为样式
+                {样式名 : 索引值 == $scope.focus属性}
+                {focus : $index == focus}
+                ng-class-odd，奇数行为蓝色，ng-class-even，偶数行为红色，注意，若值为字符串，需要加引号
+            -->
+            <li ng-repeat="stu in data"
+                ng-class-odd="'odd'"
+                ng-class-even="'even'"
+                ng-click="li_click($index)"
+                ng-class="{focus : $index == focus}">
+                <span>{{$index + 1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{$first ? '是' : '否'}}</span>
+                <span>{{$last ? '是' : '否'}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+
+            $scope.bold = 'bold';
+            $scope.li_click = function(index) {
+                $scope.focus = index;
+            };
+
+            $scope.data = [
+                { name : '张明明', sex : '女', age : 24, score : 95},
+                { name : '李清思', sex : '女', age : 27, score : 87},
+                { name : '刘小华', sex : '男', age : 28, score : 86},
+                { name : '陈忠忠', sex : '男', age : 23, score : 97}
+            ];
+
+        }]);
+
+    </script>
+</body>
+</html>

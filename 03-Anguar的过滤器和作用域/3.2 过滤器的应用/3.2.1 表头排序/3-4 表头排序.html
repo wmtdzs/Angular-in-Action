@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>表头排序</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        ul {
+            list-style-type: none;
+            width: 408px;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            float: left;
+            padding: 5px 0;
+        }
+        ul .odd {
+            color: #0026ff;
+        }
+        ul .even {
+            color: #FF0000;
+        }
+        ul .bold {
+            font-weight: bold;
+        }
+        ul li span {
+            width: 52px;
+            float: left;
+            padding: 0 10px;
+        }
+        ul .focus {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <!--
+                    在控制器中，有title和desc两个属性
+                    分别负责排序时的属性名和排序方向
+                    初始值为name和0，也就是按姓名升序排序
+                    通过点击span元素，修改属性名和排序方向
+                -->
+                <span ng-click="title='name';desc=!desc">姓名</span>
+                <span ng-click="title='sex';desc=!desc">性别</span>
+                <span ng-click="title='age';desc=!desc">年龄</span>
+                <span ng-click="title='score';desc=!desc">分数</span>
+            </li>
+            <li ng-repeat="stu in data | orderBy:title:desc"
+                ng-class-odd="'odd'"
+                ng-class-even="'even'"
+                ng-click="li_click($index)"
+                ng-class="{focus: $index==focus}">
+                <span>{{$index + 1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.age}}</span>
+                <span>{{stu.score}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+            $scope.title = 'name';
+            $scope.desc = 0;
+
+            $scope.bold = 'bold';
+
+            $scope.data = [
+                { name : '张明明', sex : '女', age : 24, score : 95},
+                { name : '李清思', sex : '女', age : 27, score : 87},
+                { name : '刘小华', sex : '男', age : 28, score : 86},
+                { name : '陈忠忠', sex : '男', age : 23, score : 97}
+            ];
+
+            $scope.li_click = function(index) {
+                $scope.focus = index;
+            }
+        }]);
+
+    </script>
+</body>
+</html>

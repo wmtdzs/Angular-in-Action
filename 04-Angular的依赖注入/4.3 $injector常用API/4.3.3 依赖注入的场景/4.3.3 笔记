@@ -1,0 +1,41 @@
+Angular中，依赖注入的概念非常重要，Angular也为依赖注入提供了许多非常实用的
+功能接口，那么，依赖注入常常用在哪里呢？
+答案是有两个地方经常使用依赖注入，一个是构建控制器时，另一个是在调用工厂方法
+构造模块时。
+
+* 构建控制器
+  控制器是一个应用的行为集合，主要负责应用的各项动作和逻辑处理，因此，它常常
+  需要注入各类服务，用于各类逻辑的调用
+  var Contr = function($scope, dep1, dep2,...) {
+      // 控制器中的处理代码
+  }
+  Contr.$inject = ['$scope', 'dep1', 'dep2',...];
+  当然，上面的方式也等价于以下代码
+  angular.module('module', [])
+      .controller('ctrl', ['$scope', 'dep1', 'dep2',...,
+      function($scope, dep1, dep2,...) {
+          // 控制器中的处理代码
+      }]);
+  在两段等价的依赖注入代码中，无论哪段代码，都使用了服务依赖注入的标记。但从执行
+  效率上来说，更建议使用后者，因为其更简洁，执行效率更高
+
+* 调用工厂方法
+除了在控制器中经常使用依赖注入外，在使用工厂方法构建服务时，同样也经常需要注入其他
+的服务。所谓的工厂方法，指类似于“config”、“factory”、“directive”和“filter”等
+构造性质的方法，它们在调用时，常用如下方式：
+  angular.module('app', [])
+      .config(['dep1', 'dep2',...,function(dep1, dep2,...){
+          // 函数体
+      }])
+      .factory('serviceName', ['dep1', 'dep2',..., function(dep1, dep2,...) {
+          // 函数体
+      }])
+      .directive('direcName', ['dep1', 'dep2',..., function(dep1, dep2,...) {
+          // 函数体
+      }])
+      .filter('filterName', ['dep1', 'dep2',... function(dep1, dep2,...) {
+          // 函数体
+      }]);
+由于工厂方法经常用来创建Angular中重要的对象(如服务、指令、过滤器等)，而这个对象在
+构建过程中，并不是孤立的，它们也常需要依赖其他的服务或指令的注入，因此，使用Angular
+开发应用，依赖注入式一个必须要了解并掌握的知识。

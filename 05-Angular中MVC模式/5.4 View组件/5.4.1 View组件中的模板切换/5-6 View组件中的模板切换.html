@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>View组件中的模板切换</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href="#/">首页</a>
+        <a href="#/book">图书</a>
+        <a href="#/game">游戏</a>
+    </div>
+    <!-- 此处注意，ng-view指令接引模板 -->
+    <div ng-view></div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <!-- 此处注意，需要用到angular-route路由文件 -->
+    <script type="text/javascript" src="../../../JS/angular-route.min.js"></script>
+    <script type="text/javascript">
+
+        /*
+            为了实现在一个页面中切换模板的功能，需要在页面中添加一个带有ng-view指令的
+            元素作为装在不同模板的容器，所有切换后的页面都在该容器中展示。
+            为了在切换模板的同时，重置URL地址内容，以便于用户的收藏和刷新，需要在构建
+            视图对应的控制器时导入一个名为“$routeProvider”服务，并将配置好的路由传递
+            给该项服务中的when函数
+             .when('/book', {
+                 controller: 'ctrl_2',
+                 template: '<div class="show">{{title}}</div>'
+             })
+             上述代码中，如果当前的URL地址为#/book，那么，Angular将先加载template下载的
+             模板代码，并将该模板下的根元素与controller指定的控制器相关联，一旦关联成功，
+             双大括号下的title属性的值将由关联的控制器提供
+             此外，在$routeProvider服务中，.otherwise函数的作用是，当没有匹配到任何地址时，
+             路由应跳转的URL
+             .otherwise({
+                redirectTo: '/' // 若没有匹配到任意地址时，路由将跳至根目录下
+             });
+        * */
+        var app = angular.module('app', ['ngRoute']);
+
+        app.controller('ctrl_1', ['$scope', function($scope) {
+            $scope.title = '这是首页';
+        }]);
+
+        app.controller('ctrl_2', ['$scope', function($scope) {
+            $scope.title = '这是图书页';
+        }]);
+
+        app.controller('ctrl_3', ['$scope', function($scope) {
+            $scope.title = '这是游戏页';
+        }]);
+
+        app.config(['$routeProvider', function($routeProvider) {
+            $routeProvider
+                    .when('/', {
+                        controller: 'ctrl_1',
+                        template: '<div class="show">{{title}}</div>'
+                    })
+                    .when('/book', {
+                        controller: 'ctrl_2',
+                        template: '<div class="show">{{title}}</div>'
+                    })
+                    .when('/game', {
+                        controller: 'ctrl_3',
+                        template: '<div class="show">{{title}}</div>'
+                    })
+                    .otherwise({
+                        redirectTo: '/'
+                    });
+        }]);
+    </script>
+</body>
+</html>

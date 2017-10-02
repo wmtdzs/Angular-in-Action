@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>作用域事件的传播</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl_parent">
+        <div ng-controller="ctrl_child_1">
+            <button ng-click="to_parent()">向父级传播</button>
+            <button ng-click="to_child()">向子级传播</button>
+            <div ng-controller="ctrl_child_c"></div>
+        </div>
+        <div ng-controller="ctrl_child_2"></div>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module('app', []);
+        // 父级控制器
+        app.controller('ctrl_parent', ['$scope', function($scope) {
+            $scope.$on('event_1', function(event, data) {
+               console.log('在父级中监听到', data);
+            });
+        }]);
+        // 子级控制器 1
+        /*
+            在控制器中添加了两个方法
+            to_parent方法中，直接调用$emit向父作用域传播“event_1”事件和“事件来源于子级”的字符串
+            to_child方法中，直接调用$broadcast方法，向子作用域传播“event_2”事件和“事件来源于父级”的字符串
+
+            虽然除了ctrl_child_1控制器外，都通过$on方法接收其他作用域传播来的事件和数据，但当用户在页面中
+            单击第一个按钮时，只有父级作用域“ctrl_parent”接收到了传播来的“event_1”事件和相应字符串内容，
+            当用户在页面中单击第二个按钮时，只有子作用域“ctrl_child_c”接收到了传播来的“event_2”事件和相应
+            字符串内容，通过作用域的事件传播数据的功能非常有限，只能调用Angular中的$emit和$broadcast方法，在
+            父级和子级作用域中进行事件数据的传递
+        * */
+        app.controller('ctrl_child_1', ['$scope', function($scope) {
+            $scope.to_parent = function() {
+                $scope.$emit('event_1', '事件来源于子级'); // 向上传播
+            };
+            $scope.to_child = function() {
+                $scope.$broadcast('event_2', '事件来源于父级'); // 向下传播
+            };
+        }]);
+
+        // 子级控制器 2
+        app.controller('ctrl_child_2', ['$scope', function($scope) {
+            $scope.$on('event_1', function(event, data) {
+               console.log('在同级中监听到', data);
+            });
+            $scope.$on('event_2', function(event, data) {
+                console.log('在同级中监听到', data);
+            });
+        }]);
+
+        // 子级控制器 1 > 子级控制器
+        app.controller('ctrl_child_c', ['$scope', function($scope) {
+            $scope.$on('event_1', function(event, data) {
+                console.log('在子级中监听到', data);
+            });
+            $scope.$on('event_2', function(event, data) {
+                console.log('在子级中监听到', data);
+            });
+        }]);
+
+    </script>
+</body>
+</html>

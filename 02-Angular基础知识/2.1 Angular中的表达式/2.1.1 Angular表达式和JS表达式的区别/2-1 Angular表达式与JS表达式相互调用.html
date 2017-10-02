@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular与JavaScript表达式之间的相互调用</title>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        执行JavaScript表达式<br/>
+        <input type="text" ng-model="expr1"/>
+        <!--
+            ng-click绑定按钮点击事件，点击时执行testExp1函数
+        -->
+        <button ng-click="testExp1(expr1)">计算</button>
+        <br/><br/>
+        执行Angular表达式<br/>
+        <input type="text" ng-model="expr2"/>
+        <!-- 绑定$eval方法直接解析字符串expr2 -->
+        <span ng-bind="$eval(expr2)"></span>
+    </div>
+
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    angular.module('app', []).controller('ctrl',['$scope', function($scope) {
+        $scope.expr1 = 20;
+        $scope.expr2 = '20 + 1 | number:0';
+        $scope.testExp1 = function(expr) {
+            // 此处只为计算并在控制台输出
+            var newv = parseInt(expr) + 1;
+            console.log(newv);
+        }
+    }]);
+
+</script>
+</body>
+</html>

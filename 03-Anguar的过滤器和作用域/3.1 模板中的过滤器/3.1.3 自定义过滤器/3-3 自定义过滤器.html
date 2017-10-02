@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        ul {
+            list-style-type: none;
+            width: 408px;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            float: left;
+            padding: 5px 0;
+        }
+        ul .odd {
+            color: #0026ff;
+        }
+        ul .even {
+            color: #FF0000;
+        }
+        ul .bold {
+            font-weight: bold;
+        }
+        ul li span {
+            width: 52px;
+            float: left;
+            padding: 0 10px;
+        }
+        ul .focus {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <ul>
+            <li ng-class="{{bold}}">
+                <span>序号</span>
+                <span>姓名</span>
+                <span>性别</span>
+                <span>年龄</span>
+                <span>分数</span>
+            </li>
+            <!--
+                0是数值，也代表false，所以过滤出的数据性别为女
+            -->
+            <li ng-repeat="stu in data | young:0"
+                ng-class-odd="'odd'"
+                ng-class-even="'even'"
+                ng-click="li_click($index)"
+                ng-class="{focus: $index==focus}">
+                <span>{{$index + 1}}</span>
+                <span>{{stu.name}}</span>
+                <span>{{stu.sex}}</span>
+                <span>{{stu.age}}</span>
+                <span>{{stu.score}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module('app', []);
+
+        app.controller('ctrl', ['$scope', function($scope) {
+            $scope.bold = 'bold';
+
+            $scope.li_click = function(index) {
+                $scope.focus = index;
+            }
+
+            $scope.data = [
+                { name : '张明明', sex : '女', age : 24, score : 95},
+                { name : '李清思', sex : '女', age : 27, score : 87},
+                { name : '刘小华', sex : '男', age : 28, score : 86},
+                { name : '陈忠忠', sex : '男', age : 23, score : 97}
+            ];
+        }]);
+
+        /*
+        * 创建了一个名为young的自定义过滤器，该过滤器通过return语句返回了一个函数，
+        * 在函数体中，通过代码编写，实现对应需求的功能开发
+        * 函数体中，有“e”和“type”两个参数
+        * “e”参数在调用过滤器时，会被将要过滤的数据自动注入
+        * “type”参数，会在调用过滤器时，通过冒号形式向过滤器传递实参，要过滤的值
+        * 直白点儿说就是，“e”是数据(本例中的data)，“type”是过滤搜索的值，young:0 ，type就是0
+        * */
+        app.filter('young', function() {
+           return function(e, type) {
+               // 由于过滤的是一个数组，所以返回一个数组
+               var out = [];
+               var sex = type ? "男" : "女";
+               var i = 0, length = e.length;
+               for (;i < length; i+=1) {
+                   if (e[i].age > 22 && e[i].age < 28 && e[i].sex == sex) {
+                       out.push(e[i]);
+                   }
+               }
+               return out;
+           }
+        });
+
+    </script>
+</body>
+</html>

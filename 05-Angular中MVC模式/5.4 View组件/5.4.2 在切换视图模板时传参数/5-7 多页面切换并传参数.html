@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>多页面切换并传参数</title>
+    <style type="text/css">
+        body {
+            font-size: 13px;
+        }
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        为了实现由不同页面模板分割不同功能，并按指定的路由进行加载的目的，
+        首先，创建3个页面，分别实现不同的功能模板。
+        其中5-7为主页面，用于创建一个布局模板，并通过ng-view指令绑定其他视图模板
+        显示的元素。
+        然后，ctrl_1和ctrl_2，前者用于以列表方式
+        显示全部学生的姓名，后者用于根据传回的学生ID号，获取对应学生的全部信息。
+    -->
+    <div ng-view></div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript" src="../../../JS/angular-route.min.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module('app', ['ngRoute']);
+        // 添加两个用于绑定子类视图模板的控制器
+        // ctrl_1用于以列表方式显示全部学生的姓名
+        app.controller('ctrl_1', ['$scope', function($scope) {
+            $scope.students = students;
+        }]);
+        // ctrl_2，根据传回学生的ID号，获取对应学生的全部信息
+        app.controller('ctrl_2', ['$scope', '$routeParams', function($scope, $routeParams) {
+            /*
+                当通过地址栏传递学生ID时，该ID会被保存在$routeParams服务的id号中，
+            * */
+            var i = 0,
+                length = students.length;
+            for (; i < length; i+=1) {
+                if (students[i].stuId == $routeParams.id) {
+                    $scope.student = students[i];
+                    break;
+                }
+            }
+        }]);
+
+        app.config(['$routeProvider', function($routeProvider) {
+            $routeProvider
+                    .when('/', {
+                        controller: 'ctrl_1',
+                        templateUrl: '5-8.html'
+                    })
+                /*
+                        在调用$routeProvider服务设置路由器传递参数时，
+                        将路由的地址格式设置为“/view/:id”
+                        对应<a href='#view/{{stu.id}}'>{{stu.name}}</a>
+                     * */
+                    .when('/view/:id', {
+                        controller: 'ctrl_2',
+                        templateUrl: '5-9.html',
+                        publicAccess: true
+                    })
+                    .otherwise({
+                        redirectTo: '/'
+                    });
+        }]);
+
+        var students = [
+            { stuId: 1000, name: '张明明', sex: '女', score: 60 },
+            { stuId: 1001, name: '李清思', sex: '女', score: 80 },
+            { stuId: 1002, name: '刘小华', sex: '男', score: 90 },
+            { stuId: 1003, name: '陈忠忠', sex: '男', score: 70 }
+        ];
+    </script>
+</body>
+</html>

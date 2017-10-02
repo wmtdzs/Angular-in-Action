@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>内置服务调用</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+            -ms-word-break: break-all;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <div class="show">当前地址是：{{url}}</div>
+        <button ng-click="onclick()">显示地址</button>
+    </div>
+
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    /*
+        $location服务：
+        * absUrl()：只读；返回url，带有所有的片段
+        * url()：读、写；返回当前url的#号后面的内容
+        * hash()：读、写，当无参时，返回锚后面的值；当带有参数的情况下，改变哈希碎片时，返回$location
+        * host()：只读，返回url中的主机路径
+        * path()：读、写；当没有任何参数时，返回当前url路径；带参时改变路径，返回$location。(返回路径永远带有"/")
+        * port()：只读，返回当前路径端口号
+        * protocol()：只读，返回当前url的协议
+        * replace()：若被调用，就会用改变后的url值替换浏览器中的历史记录，而不是在历史记录中新建信息，这样可以阻止后退
+        * search()：读、写；当无参调用时，返回才参数的JSON对象；当带参调用时，返回$location
+
+        * url(param)，带参时，修改当前url中#号后面的内容，并返回$location对象以便调用
+        * path(param)，带参时修改子路径并返回$location对象
+        * search({obj})，带参时，修改当前url中的参数并返回$location对象
+        * hash([id])，hash方法填入一个DOM元素的id值，可以快速定位到该元素
+
+        内置事件：
+        $locationChangeStart，在URL改变前触发，这种改变可以通过preventDefault方法阻止
+        $locationChangeSuccess，成功时触发
+
+        $location，当浏览器URL改变时，不会重新加载页面
+    * */
+    angular.module('app', []).controller('ctrl', ['$scope', '$location',
+        function($scope, $location) {
+            $scope.onclick = function() {
+                $scope.url = $location.absUrl();
+            }
+    }]);
+
+</script>
+</body>
+</html>

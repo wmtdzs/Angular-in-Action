@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器初始化$scope对象</title>
+</head>
+<body>
+    <!--
+        控制器可以对应用中的某一个模块进行管理，该方式的扩展性与针对性更强
+    -->
+    <div ng-controller="ctrl">
+        <span>{{text}}</span>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+    /*
+        采用内联注入的方式声明控制器的构建依赖Angular中的$scope对象
+        在构建控制器时，Angular会自动将$scope对象作为参数注入到控制器中
+        推荐使用内联注入的写法构建控制器，这样在压缩代码时不会丢失数据
+    * */
+    angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+        $scope.text = 'Hello Angular!';
+    }]);
+
+</script>
+</body>
+</html>

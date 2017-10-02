@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>$scope对象方法和属性的继承</title>
+</head>
+<body>
+    <div ng-controller="ctrl-1">
+        <div ng-controller="ctrl-2">
+            <!--
+                子级继承了父级中的$scope.text
+                是以子级可以绑定父级的属性
+            -->
+            <span class="show">{{text}}</span><br/>
+            <span class="show">{{child_text}}</span>
+            <!--
+                绑定了父级的方法，重置父级属性$scope.text
+            -->
+            <input type="button" id="btnShow" ng-click="click_show()" value="继承"/>
+        </div>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    /*
+        在通常情况下，$scope对象的继承中，不仅局限于父子层次的关系
+        还是一种内层继承外层的顺序关系，即内层可以继承包含它的所有外层中$scope对象的属性和方法
+        而在最内层控制器中添加的新属性和方法，最外层不能访问
+        这种继承是一种由内向外的顺序关系
+    * */
+    var app = angular.module('app', []);
+    app.controller('ctrl-1', ['$scope', function($scope) {
+        $scope.text = 'Hello Angular!';
+        $scope.click_show = function() {
+            $scope.text = '单击按钮后显示的内容！';
+        };
+    }]);
+
+    app.controller('ctrl-2', ['$scope', function($scope) {
+        $scope.child_text = '欢迎来到Angular的精彩世界！';
+    }]);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Model组件的基础概念</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <!--
+            通过$scope作用域显示的绑定了name属性
+            在input中使用ng-model隐式绑定了score属性
+            当input发生变化时，{{score}}的值也会发生改变
+        -->
+        <div class="show">{{name}}</div>
+        <input ng-model="score" value="95"/>
+        <div class="show">{{score}}</div>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+            $scope.name = '张三';
+        }]);
+
+    </script>
+</body>
+</html>

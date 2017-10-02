@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>一个具有计算功能的Angular程序</title>
+</head>
+<body>
+    <h3>计算并显示下列两个数值的和</h3>
+    <!--
+        在使用双花括号插值时，先通过“+”号运算符计算出结果并返回给页面
+        然后，在计算数值时使用了一个“|”管道符号，这个符号在Angular中表示调用过滤器格式化数据
+        调用方法：{{exp | filterName : para1:....paraN}}
+        exp表示Angular可以识别的任意表达式，filterName表示过滤器名称
+        Angular内置了很多过滤器，如currency、date、number、uppercase等
+        para1表示对过滤器功能的进一步描述，“number:0”表示除掉小数点后的数值,保留整数部分
+    -->
+    1.98 + 2.98 = {{ 1.98 + 2.98 | number:0 }}
+<script type="text/javascript" src="../JS/angular.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>使用service方法自定义服务</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <div class="show">姓名：{{name}}</div>
+        <div class="show">邮件：{{email}}</div>
+        <div class="show" ng-if="title">{{title}}</div>
+        <button ng-click="say()">主题</button>
+    </div>
+
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+
+    angular.module('app', [])
+            .service('$student', [function() {
+                this.name = '冯源';
+                this.email = 'fengyuan@126.com';
+                this.say = function() {
+                    return 'hello,angular!';
+                };
+            }])
+            .controller('ctrl', ['$scope', '$student', function($scope, $student) {
+                $scope.name = $student.name;
+                $scope.email = $student.email;
+                $scope.say = function() {
+                    $scope.title = $student.say();
+                }
+            }]);
+
+</script>
+</body>
+</html>

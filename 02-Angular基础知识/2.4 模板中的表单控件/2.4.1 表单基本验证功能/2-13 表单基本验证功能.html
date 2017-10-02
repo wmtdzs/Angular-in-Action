@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>表单基本验证功能</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        input {
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        为了使用Angular中提供的表单控件的验证属性，必须在输入文本框中添加ng-model指令
+        并绑定控制器中添加的相应验证属性名，否则，无法执行Angular的表单控件验证功能
+    -->
+    <form name="temp_form" ng-submit="save()" ng-controller="ctrl">
+        <div>
+            <input type="text" name="t_name" ng-model="name" required/>
+            <span ng-show="temp_form.t_name.$error.required">姓名不能为空！</span>
+        </div>
+        <div>
+            <!--
+                此处type必须为email，才会开启正则验证
+            -->
+            <input type="email" name="t_email" ng-model="email" required/>
+            <span ng-show="temp_form.t_email.$error.required">邮箱不能为空</span>
+            <span ng-show="temp_form.t_email.$error.email">邮箱格式不对！</span>
+        </div>
+        <!--
+            在此处添加ng-disabled禁用属性，绑定表单是否验证成功的属性值
+            若返回true，则表示验证未成功，ng-disabled=true，按钮不可用
+            反之返回false，则验证成功，ng-disabled=false，按钮可用
+        -->
+        <input ng-disabled="temp_form.$invalid" type="submit" value="提交"/>
+    </form>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        angular.module('app', []).controller('ctrl', ['$scope', function($scope) {
+            $scope.name = '冯源';
+            $scope.email = 'fengyuan@163.com';
+
+            $scope.save = function() {
+                console.log('提交成功');
+            }
+        }]);
+
+    </script>
+</body>
+</html>

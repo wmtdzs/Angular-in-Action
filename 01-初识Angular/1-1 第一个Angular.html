@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--
+    此处注意ng-app属性不可缺少，此属性通知引入Angular文件框架
+    在html元素中添加ng-app属性，表明Angular可以管理整个页面
+    ng-app属性还可以添加至某个元素中，表明仅在这个元素的范围内可以调用Angular框架
+-->
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>第一个Angular程序</title>
+</head>
+<body>
+    <!--
+        两个大括号是Angular框架插入动态数据的一种方式，称之为“双括号插值语法”
+        通常情况下，通过这种方式的插入的数据均为表达式，且在插入时已获取了表达式的结果值，并直接显示在页面中
+    -->
+    {{ 'Hello，欢迎来到Angular世界！' }}
+<script type="text/javascript" src="../JS/angular.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>控制器中属性和方法的继承</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            background-color: #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl_1">
+        <div class="show">
+            {{ name_a + '/' + name_b + '/' + name_c + '/' + score }}
+        </div>
+        <div ng-controller="ctrl_2">
+            <div class="show">
+                {{ name_a + '/' + name_b + '/' + name_c + '/' + score }}
+            </div>
+            <div ng-controller="ctrl_3">
+                <div class="show">
+                    {{ name_a + '/' + name_b + '/' + name_c + '/' + score }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module('app', []);
+
+        app.controller('ctrl_1', ['$scope', function($scope) {
+            $scope.name_a = '张三';
+            $scope.score = 60;
+        }]);
+        // 继承了ctrl_1作用域的属性name_a，并复写了score属性
+        app.controller('ctrl_2', ['$scope', function($scope) {
+            $scope.name_b = '李四';
+            $scope.score = 70;
+        }]);
+        // 继承了ctrl_1和ctrl_2作用域的属性name_a和name_b，并复写了score属性
+        app.controller('ctrl_3', ['$scope', function($scope) {
+            $scope.name_c = '王二';
+            $scope.score = 80;
+        }]);
+        /*
+            严格来讲，一个控制器只包括一个对应视图模板的业务逻辑，不应将过多的页面DOM
+            操作加入到控制器中，这样做容易加大测试操作的复杂程度。另外不属于视图业务逻辑
+            的数据请求和获取，应尽量通过服务调用的形式来实现，而不应在控制器中实现，这样可以
+            保持控制器的功能单一性
+        * */
+    </script>
+</body>
+</html>

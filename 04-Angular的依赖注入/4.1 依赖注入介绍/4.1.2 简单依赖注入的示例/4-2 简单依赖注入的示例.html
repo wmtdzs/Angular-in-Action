@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>简单依赖注入的示例</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+        }
+        .show {
+            border: 1px solid #ccc;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        <div class="{{cls}}">{{text}}</div>
+        <button ng-click="onClick(1)">早上</button>
+        <button ng-click="onClick(2)">上午</button>
+        <button ng-click="onClick(3)">下午</button>
+        <button ng-click="onClick(4)">晚上</button>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+
+        /*
+           通过$provide服务中的provider()、factory()、value()、service()方法分别在模块中定义名称为
+           show_1、show_2、show_3、show_4的可注入型变量，而这些变量又分别对应一个函数，这些函数的功能
+           都是相同的，即返回用户输入的字符内容
+           而后，在定义模板中控制器层代码时，将这些定义好的变量全部作为依赖注入变量来使用，当页面在
+           解析这段代码时，Angular将启动$provide服务，并返回多个服务一一对应的实例，通过这些实例分别
+           处理这些注入变量对应的函数功能
+        * */
+        var app = angular.module('app', []);
+
+        app.config(function($provide) {
+           $provide.provider('show_1', function() {
+              this.$get = function() {
+                  return {
+                      val : function(name) {
+                          return name;
+                      }
+                  }
+              }
+           });
+        });
+
+        app.config(function($provide) {
+           $provide.factory('show_2', function() {
+               return {
+                   val : function(name) {
+                       return name;
+                   }
+               }
+           })
+        });
+
+        app.config(function($provide) {
+           $provide.value('show_3', function(name) {
+              return name;
+           });
+        });
+
+        app.config(function($provide) {
+           $provide.service('show_4', function() {
+              return {
+                  val : function(name) {
+                      return name;
+                  }
+              }
+           });
+        });
+
+        app.controller('ctrl', ['$scope', 'show_1', 'show_2', 'show_3', 'show_4',
+            function($scope, show_1, show_2, show_3, show_4) {
+                $scope.cls = '';
+                $scope.onClick = function(t) {
+                    $scope.cls = 'show';
+                    switch (t) {
+                        case 1:
+                            $scope.text = show_1.val('早上好！');
+                            break;
+                        case 2:
+                            $scope.text = show_2.val('上午好！');
+                            break;
+                        case 3:
+                            $scope.text = show_3('下午好！');
+                            break;
+                        case 4:
+                            $scope.text = show_4.val('晚上好！');
+                            break;
+                    }
+                }
+            }
+        ]);
+
+    </script>
+</body>
+</html>
