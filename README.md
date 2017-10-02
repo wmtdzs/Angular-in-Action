@@ -1,7 +1,7 @@
 # Angular-in-Action
 Angular in action project
 # 创建项目
-git clone git@github.com:wmtdzs/Angular-in-Action.git // 克隆项目<br/>
+git clone git@github.com:wmtdzs/Angular-in-Action.git // 克隆项目<br>
 cd Angular-in-Action // 进入项目
 git checkout -b <你的分支> // 建立本地开发分支
 # 发布修改
