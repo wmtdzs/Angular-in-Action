@@ -1,0 +1,17 @@
+在Angular中，页面与服务端交互的主要方式是调用$http服务模块，该模块的底层封装了JavaScript
+中的XMLHttpRequest对象，并只接收一个对象作为参数，用于收集生成HTTP请求的配置内容，同时，
+返回一个promise对象，该对象拥有名为success和error的两个回调方法。
+此外，根据请求类型的不同，$http模块提供了不同的调用方式，其通用的格式如下：
+    $http.请求类型(url, [data], [config])
+         .success(data, status, headers, config)
+         { // 成功后的操作 }
+         .error(data, status, headers, config)
+         { // 错误时的操作 }
+在上述调用格式代码中，参数url表示一个相对或绝对的服务端请求路径，而请求类型则包括POST、GET、
+JSONP、DELETE、PUT、HEAD这6中常见的请求方式，其中POST和PUT类型请求可以通过可选参数data来发送
+数据，除发送数据外，还可以通过可选参数config来设置请求时传递的数据。
+当$http请求成功时，可以在回调的success方法中获取服务端返回的数据和相关信息。其中：
+data参数表示返回体，通常是请求返回的结果集；
+status表示请求后返回的状态值；
+headers表示请求后返回的头函数，用来显示返回请求的头部信息；
+config是一个对象，通过该对象，可以获取发送HTTP请求时完整的配置信息；

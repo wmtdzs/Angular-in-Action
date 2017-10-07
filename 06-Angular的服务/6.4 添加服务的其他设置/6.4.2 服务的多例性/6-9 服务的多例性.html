@@ -42,27 +42,27 @@
                 this.name = '王明明';
                 this.score = 0;
             };
+            this.create = function() {
+                return new Student({
+                    code: 1001,
+                    name: '王心名',
+                    score: 98
+                });
+            };
         }
-
-        Student.create = function() {
-            return new Student({
-                code: 1001,
-                name: '王心名',
-                score: 98
-            });
-        };
 
         angular.module('app', [])
                 .factory('$student', [function() {
+                    var stu = new Student();
                     return {
-                        create: Student.create
+                        create: stu.create
                     }
                 }])
                 .controller('ctrl_1', ['$scope', '$student', function($scope, $student) {
                     $scope.stu = $student.create();
                     $scope.reset = function() {
                         $scope.stu.reset();
-                    }
+                    };
                 }])
                 .controller('ctrl_2', ['$scope', '$student', function($scope, $student) {
                     $scope.stu = $student.create();
