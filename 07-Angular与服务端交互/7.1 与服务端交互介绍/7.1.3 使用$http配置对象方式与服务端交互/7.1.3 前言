@@ -1,0 +1,40 @@
+使用$http快捷方式与服务端交互，虽然简便，但配置时缺少灵活性。
+针对这种情况，我们可以将$http服务模板当成一个函数来使用，将构造XHR对象的所有配置项
+作为一个对象，并将对象定义为函数的形参，在调用时，只需修改形参对象中的各属性值即可，
+调用格式如下：
+    $http({
+        method:
+        url:
+        data:
+        params:
+        transformRequest:
+        transformResponse:
+        cache:
+        timeout:
+    })
+上述代码中，$http函数中的形参就是一个配置对象，在该对象中：
+method：method属性表示HTTP请求时的方式，它是一个字符串，值是POST、GET、JSONP、DELETE、PUT、HEAD其中之一；
+url：url表示向服务器请求的地址，是一个相对或绝对的字符串形式；
+data：data属性是一个对象，该对象将作为消息体的一部分发送给服务端，常用于POST或PUT数据时使用；
+params：params属性是一个字符串或对象，当发送HTTP请求时，如果是对象，将自动按json格式进行序列化，并追加到URL的后面，
+作为发送数据的一部分，传递给服务器；
+transformRequest：transformRequest用于对请求体头信息和请求体进行序列化转换，并生成一个数组发送给服务端；
+transformResponse：transformResponse用于对响应体头信息和响应体进行反序列化的转换，其实质就是解析服务器发送来的被
+序列化后的数据；
+cache：表示是否对HTTP请求返回的数据进行缓存，若为true，则表示需要缓存，否则不缓存；
+timeout：表示延迟发送HTTP请求的时间，单位是毫秒；
+
+在Angular中，执行$http函数后，它的返回内容其实是一个promise对象，因此，可以直接通过链式的写法调用then方法获取成功
+和异常后的数据，下面两段代码的功能是相同的。
+    $http({
+        // 配置对象
+    })
+    .success(fn1)
+    .error(fn2)
+    等价于：
+    $http({
+        // 配置对象
+    })
+    .then(fn1, fn2)
+其中，fn1和fn2分别表示请求成功和错误时的返回函数，虽然两者功能相同，但使用then方法可以接收到服务端的完整响应对象，
+而success和error方法只是接收解析并处理后的响应对象，也就是说，then方法获取的返回对象更原始和完整

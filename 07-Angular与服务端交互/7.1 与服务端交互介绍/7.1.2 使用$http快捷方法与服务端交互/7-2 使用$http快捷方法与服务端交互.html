@@ -15,22 +15,38 @@
 <script type="text/javascript" src="../../../JS/angular.min.js"></script>
 <script type="text/javascript">
     angular.module('app', [])
+            /*
+                为了能将客户端中的数据以POST方式通过$http服务发送到服务端，
+                需要调用config方法，注入$httpProvider服务，并调用该服务
+                对象重置发送数据时的默认函数transformRequest和属性Content-type的值。
+
+                在重置transformRequest函数时，对HTTP发送体内容进行转码，并对转码后
+                的内容进行序列化操作，便于发送时的数据传输和服务端的接收；
+                此外，由于是POST数据请求，因此，还必须将请求头信息中的Content-type属性
+                值重置为"application/x-www-form-urlencoded"编码格式，否则，无法将客户端
+                的数据以POST方式发送给服务端。
+            * */
             .config(function($httpProvider) {
                 $httpProvider.defaults.transformRequest = function(obj) {
+                    // obj就是post方法要传过来的参数
                     var arrStr = [];
+                    // 使用for循环，将{name:'fy'}变为name=fy并放到数组中
                     for (var p in obj) {
+                        // 对key/value进行编码
                         arrStr.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
                     }
+                    // 若有多个参数，以'&'符号拼接为字符串
                     return arrStr.join('&');
                 };
                 $httpProvider.defaults.headers.post = {
+                    // 重置请求头编码格式
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             })
             .controller('ctrl', ['$scope', '$http', function($scope, $http) {
                 var postData = { name : 'fy' };
                 $scope.onclick = function() {
-                    // 使用前请开启php服务
+                    // 使用前请开启php服务，php文件编码格式必须为utf-8
                     $http.post('http://localhost:8080/AngularHttpTest/post.php', postData)
                             .success(function(data, status, headers, config) {
                                $scope.result = data;
