@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义$http服务中的缓存</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div class="frame" ng-controller="ctrl">
+        <div class="show">
+            <div class="tip">接收的内容是：{{result}}</div>
+            <button ng-click="refresh()">刷新</button>
+        </div>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', [])
+            /*
+                无论是默认还是自定义缓存对象，它们仅保存在一次请求中，
+                没有存放在内存或文件中，一旦刷新页面，原来的缓存内容会消失
+            * */
+            .service('cache', ['$cacheFactory', function($cacheFactory) {
+                // 缓存实例最大容量定义为3次
+                return $cacheFactory('myCache', { capacity:3 });
+            }])
+            .controller('ctrl', ['$scope', '$http', 'cache',
+                function($scope, $http, cache) {
+                    var url = 'http://localhost:8080/AngularHttpTest/cache.php';
+                    // 将cache属性值设置为cache服务
+                    $http({
+                        method: 'GET',
+                        url: url,
+                        cache: cache
+                    }).success(function(data, status, headers, config) {
+                        $scope.result = data;
+                        // 调用put方法将data存放到键名为c的缓存中
+                        cache.put('c', data);
+                    });
+                    $scope.refresh = function() {
+                        var _c = cache.get('c');
+                        $scope.result = (_c) ? _c + "(来源缓存)" : "刷新失败！";
+                    }
+                }
+            ]);
+</script>
+</body>
+</html>

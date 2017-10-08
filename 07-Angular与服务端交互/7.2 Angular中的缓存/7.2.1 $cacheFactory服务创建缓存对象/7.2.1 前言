@@ -1,0 +1,48 @@
+使用$cacheFactory服务创建缓存对象非常简单，因为绝大部分的缓存都以key/value形式存储的，
+因此只需要调用$cacheFactory服务来创建一个缓存的key名，即缓存唯一的ID号就创建出了一个
+缓存对象，创建格式如下：
+    $cacheFactory(key, [options]);
+上述代码中，参数key表示缓存对象的名称，可选参数options是一个对象，用于指定缓存的特征。
+通常情况下，将在这个对象中添加一个capacity属性，它是一个数字，用于说明缓存的最大容量。
+若该值为3，表示它只能缓存前3次请求，进入第4次时，自动将使用最少的内容从缓存中删除，
+整个方法返回一个指定键名的缓存对象，通过get方法可访问这个对象，代码如下：
+    $cacheFactory.get(key)
+创建或获取缓存对象后，就可以使用对象本身的方法来进行缓存的操作。
+1. info方法
+info方法返回缓存对象的一些消息，包括大小、名称，代码如下：
+    var cache = $cacheFactory("test");
+    console.log(cache.info());
+上述代码中
+第1行创建了一个名为test的缓存对象，并将该对象保存至cache变量中；
+第2行，调用对象的info方法，在控制台输出缓存对象的大小和名称信息，输出内容如下：
+    Object {id: "test", size: 0}
+因为只是创建了一个名为test的缓存对象，还没有写入内容，因此，大小为0
+
+2. put方法
+put方法可以向缓存对象中以key/value的形式添加缓存内容，代码如下：
+    cache.put("c1", "hello");
+    console.log(cache.put("c1", "hello"));
+上述代码中
+第1行表示通过调用put方法向cache缓存对象中添加一个键名为c1、键值为hello的缓存内容，
+整个方法还将返回添加后的键值；
+第2行代码将返回hello
+
+3. get方法
+get方法可以获取键名对应的键值内容，代码如下：
+    console.log(cache.get("c1"));
+    console.log(cache.get("c2"));
+上述代码中
+第1行将输出键名为c1对应的值，即hello
+第2行，由于没有添加名为c2的键名，因此找不到对应的值，则返回一个undefined字符
+
+4. remove方法
+remove方法可以移除指定键名的缓存，代码如下：
+    cache.remove("c1");
+    console.log(cache.get("c1"));
+上述代码中
+第1行表示移除键名为c1的对应缓存内容
+第2行，由于移除了c1的缓存，是以输出undefined字符
+
+5. removeAll和destory方法
+removeAll方法用于移除全部的缓存内容，并重置缓存结构；
+destory方法则是从$cacheFactory缓存注册表中删除所有的缓存引用条目，并重置缓存对象；

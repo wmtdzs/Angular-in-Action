@@ -1,0 +1,30 @@
+promise是什么，通过一个现实中的实例来说明。
+例如，一个名为A的客户，向一家名为B的公司要求开发一个Web页面，B公司答应3天可以做完，这个承诺
+就是一个promise对象，它本质上是A客户发起的延期业务，可以理解为通过$q对象调用defer方法创建了
+一个延期对象的过程。
+接下来，在这3天中，客户可能会与公司交流开发进度，这可以理解为调用延期对象中的notify方法发送
+消息的过程，表明这个延期业务的状态是“进行中”；若在3天后，B公司将A客户要求开发的页面正常交付，
+则可以理解为调用延期对象中的resolve方法的过程，表明这个延期业务的状态是“已解决”；而若B公司
+在制作过程中，发现无法实现，则通知A客户不能交付，这可以理解为调用延期对象中reject方法的过程，
+表明这个延期业务的状态是“已拒绝”。
+若B公司在接到A客户的需求时，发现之前做过的一个页面与现在需求完全一致时，决定直接将原来做好的
+页面给A客户，客户也很满意，这种情况没有产生延期业务，则可以理解为通过$q对象调用when方法的过程。
+
+想要在Angular中创建一个promise对象，必须在模板中先注入$q服务，并先调用defer方法创建一个延期对象，代码如下：
+    angular.module('app', [])
+           .controller('ctrl', ['$scope', '$q', function($scope, $q) {
+                var defer = $q.defer();
+           }]);
+在上述代码中，defer是一个延期对象，它包括3个方法，分别为notify、resolve、reject和一个名为“promise”
+的属性。在这3个方法中，都可以通过value参数进行传值，当调用延期对象的“promise”属性时，就创建了一个
+promise对象。
+一旦创建了promise对象，就可以通过调用then方法来执行延期对象不同操作后的回调函数，then方法中包含与
+操作相对应的3个回掉函数，代码格式如下：
+    promise.then(successCallback, errorCallback, notifyCallback);
+上述代码中，successCallback表示执行resolve方法时的回调函数，errorCallback表示执行reject方法时的回调
+函数，notifyCallback表示执行notify方法时的回调函数，函数中的参数值可以在执行方法时进行传递，返回对象
+支持链式写法，操作方便。
+
+在$q服务中，还有一个all方法，该方法的功能是返回一个新的promise对象，该方法中的参数是一个promise数组，
+当数组中的所有defer对象都解决时，才返回一个解决后promise对象，否则，若有一个defer对象调用了reject方法，
+那么，返回对象也将调用reject方法。

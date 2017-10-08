@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>promise对象的创建和使用</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div class="frame" ng-controller="ctrl">
+        <div class="show">
+            <div class="tip">{{t0}}</div>
+            <div class="tip">{{t1}}</div>
+            <button ng-click="action(true)">解决</button>
+            <button ng-click="action(false)">拒绝</button>
+        </div>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', [])
+            .controller('ctrl', ['$scope', '$q', function($scope, $q) {
+                var defer = $q.defer();
+                $scope.action = function(type) {
+                    // notify的值永远是1，此处传0，回调内累加
+                    defer.notify(0);
+                    // resolve和reject的值永远是2，此处传1，回调内累加
+                    type ? defer.resolve(1) : defer.reject(1);
+                };
+                var promise = defer.promise;
+                promise.then(function(n) {
+                    // resolve
+                    n++;
+                    $scope.t1 = '已处理完成：' + n;
+                }, function(n) {
+                    // reject
+                    n++;
+                    $scope.t1 = '未完成原因：' + n;
+                }, function(n) {
+                    // notify
+                    n++;
+                    $scope.t0 = '正在处理中：' + n;
+                });
+            }]);
+</script>
+</body>
+</html>

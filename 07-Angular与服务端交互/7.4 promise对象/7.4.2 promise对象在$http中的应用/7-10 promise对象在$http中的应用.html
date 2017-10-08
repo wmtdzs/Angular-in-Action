@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>$promise对象在$http中的应用</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <div class="frame" ng-controller="ctrl">
+        <div class="show">
+            <div class="tip">{{result}}</div>
+        </div>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', [])
+            .factory('async', ['$q', '$http', function($q, $http) {
+                var defer = $q.defer();
+                $http.get('http://localhost:8080/AngularHttpTest/async.php')
+                        .success(function(data) {
+                            defer.resolve(data);
+                        })
+                        .error(function(reason) {
+                            defer.reject(reason);
+                        });
+                return defer.promise;
+            }])
+            .controller('ctrl', ['$scope', 'async', function($scope, async) {
+                var promise = async;
+                promise.then(function(data) {
+                    $scope.result = '请求成功' + data;
+                }, function(reason) {
+                    $scope.result = '请求失败' + reason;
+                });
+            }]);
+</script>
+</body>
+</html>

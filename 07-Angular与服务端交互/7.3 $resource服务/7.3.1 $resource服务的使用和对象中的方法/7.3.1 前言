@@ -1,0 +1,63 @@
+$resource服务本身是一个可选性的模块，因此，它并没有包含在Angular中，若需要使用该模块，
+需要在页面中先通过<script>元素进行文件的导入，代码如下：
+    <script src='../JS/angular-resource.min.js'></script>
+上述代码中的angular-resource.min.js文件可以在Angular官网中直接下载，通过上述方式在页面
+导入模块文件后，在应用的模型中通过下列方式进行注入，代码如下：
+    angular.module('myapp', ['ngResource']);
+通过上述代码注入后，就可以在控制器或其他自定义的服务中直接调用$resource服务了，它的完整
+调用格式如下所示：
+    var obj = $resource(url[, paramDefaults][, actions]);
+上述代码中，obj表示请求服务器指定url地址后返回的$resource对象，该对象中就包含了与服务端
+进行数据交互的全部API。此外，参数url表示请求服务器的地址，其中允许占位符变量，该变量必须
+以“:”为前缀，代码如下：
+    var obj = $resource('url?action=:act');
+    obj.$save{ act: 'save' };
+那么，在执行save动作时，向服务端发送的实际地址就为“url?action=save”。此外，可选项参数
+paramDefaults是一个对象，用于设置请求时的默认参数值，在发送请求时，该对象中的全部值将自动
+进行序列化，如遇占位符变量自动替换，并将结果添加到url请求之后，代码如下：
+    var obj = $resource('url?action=:act', {
+        act: 'save',
+        a: '1',
+        b: '2'
+    });
+在执行上述代码后，向服务端发送的实际地址为“url?action=save&a=1&b=2”。与可选项参数paramDefaults
+不同，另外一个可选项参数actions虽然也是一个对象，但它的功能是扩展默认资源动作。例如，可以在该
+对象中自定义新的方法，代码如下：
+    var obj = $resource('url?action=:act',{
+        // 定义请求默认值
+    },{
+        a: {
+            method: 'get'
+        }
+    });
+上述代码执行后，就可以在$resource对象中直接调用在可选项参数actions中自定义的方法a，即obj.$a()。
+
+调用$resource服务所返回的对象中包含了5个与服务端交互的常用API。按请求类型来说，2个是GET类型API，
+另外3个为非GET类型，详细使用方法如下：
+1. $resource对象中的GET类型请求
+$resource对象中GET类型的请求有2个，分别是get和query方法，它们的调用格式如下：
+    var obj = $resource('url');
+    // get()方法
+    obj.get(params, successFn, errorFn);
+    // query方法
+    obj.query(params, successFn, errorFn);
+无论是get还是query方法，它们请求时的参数都是相同的。params参数是一个对象，用于添加随请求一起发送
+的数据，请求时，该对象中的键值将自动进行序列化并添加到url的后面；successFn参数表示请求成功后的回调
+函数，errorFn参数表示请求失败时的回调函数。
+get和query方法最大的区别在于，前者返回值可以是单个资源，而后者必须返回一个数组或集合类的资源，需注意。
+
+2. $resource对象中的非GET类型请求
+在$resource对象中，除2个GET类型的请求外，还包括3个非GET类型的请求，分别为save、delete、remove，格式如下：
+    var obj = $resource('url');
+    // save()方法
+    obj.save(params, postData, successFn, errorFn);
+    // delete()方法
+    obj.delete(params, postData, successFn, errorFn);
+    // remove()方法
+    obj.remove(params, postData, successFn, errorFn);
+上述3个方法中，执行时的参数都是相同的，与GET类型请求相比，增加了一个postData参数，该参数是一个对象，它的
+功能是添加以非GET请求向服务端发送的数据体，其他参数与GET类型相同。
+save方法在服务端保存数据时使用。执行时，将以POST方式向服务端发送一个请求，postData参数中添加的数据体也将
+一起被发送。
+delete和remove方法都是在删除服务端数据时使用。执行时，将携带postData参数中添加的数据体，以delete方式向服务
+端发送一个请求。两者之间的区别在于，remove方法可以解决IE浏览器中delete是JavaScript保留字而导致的错误问题。
