@@ -2,20 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2099f473-0a7d-43f9-b306-93f0433e9e80" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1.1 指令定义的基础/8-1 创建一个新的指令.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1.1 指令定义的基础/8.1.1 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1.2 设置指令对象的基础属性/8-2 设置指令对象的基础属性.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1.2 设置指令对象的基础属性/8.1.2 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1.2 设置指令对象的基础属性/tpl.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.1 指令对象中的transclude属性/8-3 设置指令对象中的transclude属性.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.1 指令对象中的transclude属性/8.2.1 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.2 指令对象中的link属性/8-4 设置指令对象中的link属性.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.2 指令对象中的link属性/8.2.2 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.3 指令对象中的compile属性/8-5 设置指令对象中的compile属性.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.3 指令对象中的compile属性/8.2.3 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.3 Angular指令对象的scope属性/8.3.1 scope属性是布尔值/8-6 scope属性是布尔值.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/08-Angular的指令/8.3 Angular指令对象的scope属性/8.3.1 scope属性是布尔值/8.3.1 前言" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Angular in Action.iws" />
@@ -179,10 +165,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="8.3 Angular指令对象的scope属性" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="8.3.1 scope属性是布尔值" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -356,9 +338,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1046" extended-state="7" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24099576" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24099576" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990867" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990867" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
