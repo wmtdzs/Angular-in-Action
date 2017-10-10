@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>设置指令对象中的transclude属性</title>
+    <style type="text/css">
+        .frame {
+            padding: 2px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .tip {
+            font-size: 9px;
+            color: #666;
+            margin: 3px 5px;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        {{text}}是纯文本内容，会自动被<span>标记包裹
+    -->
+    <ts-tplscript>{{text}}</ts-tplscript>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', [])
+            .directive('tsTplscript', function() {
+                return {
+                    restrict: 'EAC',
+                    templateUrl: 'tpl',
+                    transclude: true
+                };
+            });
+</script>
+<script type="text/ng-template" id="tpl">
+    <div class="frame">
+        <input type="text" ng-model="text">
+        <div ng-transclude class="tip"></div>
+    </div>
+</script>
+</body>
+</html>

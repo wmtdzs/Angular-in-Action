@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>设置指令对象中的link属性</title>
+    <style type="text/css">
+        .frame {
+            padding: 2px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .tip {
+            font-size: 9px;
+            color: #666;
+            margin: 3px 5px;
+        }
+    </style>
+    <script type="text/ng-template" id="tpl">
+        <button>单击按钮</button>
+    </script>
+</head>
+<body>
+    <div class="frame">
+        <ts-tplscript></ts-tplscript>
+        <div class="tip">{{content}}</div>
+    </div>
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+    var app = angular.module('app', []);
+    app.directive('tsTplscript', function() {
+       return {
+           restrict: 'EAC',
+           templateUrl: 'tpl',
+           replace: true, // 添加了replace属性后，模板中只能添加一个html内容
+           /*
+            由于指令中并未定义scope属性，因此，scope参数就是元素外层的父级$scope属性，
+            即控制器注入的$scope属性
+           * */
+           link: function(scope, element, attr) {
+               /*
+                    若没有replace，template中便可以有多个元素，
+                    此时element指向的是ts-tplscript，
+                    可以作为事件托管元素。
+               * */
+               element.bind('click', function() {
+                   scope.$apply(function() {
+                      scope.content = '这是点击后显示的内容';
+                   });
+                   /*
+                      此处也可以将attr.$$element[0]替换为this
+                      若有template中有多个元素，$$element[0]指向ts-tplscript，
+                      而其中元素在$$element.children数组中
+                   * */
+                   attr.$$element[0].disabled = true;
+               });
+           }
+       }
+    });
+
+</script>
+</body>
+</html>

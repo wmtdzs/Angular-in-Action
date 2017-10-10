@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>设置指令对象中的compile属性</title>
+    <style type="text/css">
+        .frame {
+            padding: 2px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame" ng-controller="ctrl">
+        <ts-a>
+            <ts-b>
+                <ts-c>
+                    {{tip}}
+                </ts-c>
+            </ts-b>
+        </ts-a>
+    </div>
+
+<script type="text/javascript" src="../../../JS/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('app', [])
+            .controller('ctrl', ['$scope', function($scope) {
+                $scope.tip = '跟踪compile执行过程';
+            }])
+            /*
+                首先执行compile函数，若遇到嵌套形式，则先执行父元素的compile，后执行子元素的compile。
+                执行完compile函数后，执行pre函数，若遇到嵌套形式，则先执行父元素的pre函数，后执行子元素的pre函数。
+                执行完pre函数后执行post函数，若遇到嵌套形式，与前两个相反，限制性子元素的post函数，再执行父元素的post函数
+
+                若compile返回的是一个post函数，执行顺序和返回对象时post函数的执行顺序相同
+            * */
+            .directive('tsA', function() {
+                return {
+                    restrict: 'EAC',
+                    compile: function(element, attrs, trans) {
+                        console.log('正在编译A指令');
+                        return {
+                            pre: function(scope, element, attrs) {
+                                console.log('正在执行A指令中的pre函数')
+                            },
+                            post: function(scope, element, attrs) {
+                                console.log('正在执行A指令中的post函数');
+                            }
+                        }
+                    }
+                };
+            })
+            .directive('tsB', function() {
+               return {
+                   restrict: 'EAC',
+                   compile: function(element, attrs, trans) {
+                       console.log('正在编译B指令');
+                       return {
+                           pre: function(scope, element, attrs) {
+                               console.log('正在执行B指令中的pre函数');
+                           },
+                           post: function(scope, element, attrs) {
+                               console.log('正在执行B指令中的post函数');
+                           }
+                       }
+                   }
+               }
+            })
+            .directive('tsC', function() {
+                return {
+                    restrict: 'EAC',
+                    compile: function(element, attrs, trans) {
+                        console.log('正在编译C指令');
+                        return {
+                            pre: function(scope, element, attrs) {
+                                console.log('正在执行C指令中的pre函数');
+                            },
+                            post: function(scope, element, attrs) {
+                                console.log('正在执行C指令中的post函数');
+                            }
+                        }
+                    }
+                }
+            });
+</script>
+</body>
+</html>

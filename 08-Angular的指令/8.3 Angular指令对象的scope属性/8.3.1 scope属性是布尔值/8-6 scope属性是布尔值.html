@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>scope属性是布尔值</title>
+    <style type="text/css">
+        .frame {
+            padding: 2px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .tip {
+            font-size: 9px;
+            color: #666;
+            margin: 3px 5px;
+        }
+    </style>
+    <script type="text/ng-template" id="tpl">
+        <div class="tip">{{message}}</div>
+        <button ng-transclude=""></button>
+    </script>
+</head>
+<body>
+    <div class="frame">
+        <input type="text" ng-model="message" placeholder="请输入提示内容">
+        <ts-message>固定</ts-message>
+    </div>
+
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', []);
+        /*
+            将指令对象中的scope属性值设置为true，表示允许子作用域存在“独立”的scope对象,
+            这种“独立”指的是当父作用域的变量发生变化时，子作用域对应的变量也将自动同步
+            变化，即父作用域的数据影响子作用域中对应的数据；反之，当子作用域的变量发生变化时，
+            并不会影响父作用域中对应的数据。
+            将scope属性设置为true，则生成了一个隔离式的作用域，这种作用域主要用于创建可复用
+            的组件。通过这种隔离式的特征，可以避免指令中局部作用域对外部和全局作用域的污染。
+            需要说明的是，若一个元素绑定了多个拥有隔离作用域的指令，只有指令模板中的根元素
+            才能获取一个新作用域，而并非全部的模板元素。
+        * */
+        app.directive('tsMessage', function() {
+           return {
+               restrict: 'EAC',
+               templateUrl: 'tpl',
+               transclude: true,
+               scope: true,
+               link: function(scope, element, attrs) {
+                   element.on('click', function(e) {
+                       scope.$apply(function() {
+                           scope.message = '这是单击按钮后的值';
+                       });
+                   });
+               }
+           };
+        });
+    </script>
+</body>
+</html>
