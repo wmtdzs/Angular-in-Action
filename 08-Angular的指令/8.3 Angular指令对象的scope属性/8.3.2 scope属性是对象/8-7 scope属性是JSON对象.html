@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>scope属性是JSON对象</title>
+    <style type="text/css">
+        .frame {
+            padding: 2px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .tip {
+            font-size: 9px;
+            color: #666;
+            margin: 3px 0;
+            padding: 5px 0;
+        }
+    </style>
+    <script type="text/ng-template" id="tpl">
+        <div class="tip">
+            <span>姓名：{{textName}}</span>
+            <span>年龄：{{textAge}}</span>
+        </div>
+        <button ng-transclude></button>
+    </script>
+</head>
+<body>
+    <div class="frame" data-ng-controller="ctrl">
+        姓名：<input type="text" ng-model="text_name" placeholder="请输入姓名"><br/>
+        年龄：<input type="text" ng-model="text_age" placeholder="请输入年龄">
+        <div class="tip">{{tip}}</div>
+        <ts-json a-attr="{{text_name}}" b-attr="text_age" reset="reSet()">重置</ts-json>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', [])
+                .controller('ctrl', ['$scope', function($scope) {
+                    $scope.reSet = function() {
+                        $scope.tip = '姓名与年龄重置成功';
+                    }
+                }])
+                .directive('tsJson', function() {
+                    return {
+                        restrice: 'EAC',
+                        templateUrl: 'tpl',
+                        transclude: true,
+                        /*
+                            将scope属性设置为JSON对象，先在指令元素中创建“a-attr”或“b-attr”的属性，
+                            再定义属性名时，使用“-”隔开；绑定时，如属性名称为“a-attr”，使用第一种策略时，
+                            写作“@aAttr”，在scope值中绑定后，就可以在link函数中使用了。
+                            由于在指令中的绑定策略不同，在指令元素中，属性绑定属性值也会有些变化，使用“@绑定”
+                            方式绑定属性，绑定方式为双大括号“{{}}”，而是用“=绑定”方式绑定的属性，绑定方式
+                            为“=”等号。
+                        * */
+                        scope: {
+                            textName: '@aAttr', // 当属性重置时，父作用域不会改变
+                            textAge: '=bAttr',  // 当属性重置时，父作用域改变
+                            // &reset指向的是指令元素中的reset属性
+                            reSet: '&reset'     // 使用子作用域调用父作用域的函数，属性名为reSet，调用时就是reSet()
+                        },
+                        link: function(scope, element, attrs) {
+                            element.on('click', function() {
+                                scope.$apply(function() {
+                                    scope.reSet();
+                                    scope.textName = '张三';
+                                    scope.textAge = '20';
+                                });
+                            });
+                        }
+                    }
+                })
+    </script>
+</body>
+</html>
