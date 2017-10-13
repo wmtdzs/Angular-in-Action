@@ -1,0 +1,7 @@
+与$locationChangeStart事件不同，$locationChangeSuccess事件是当URL地址完成改变后触发，
+可以这样来理解这两个事件的关系，在$locationChangeSuccess事件触发之前，一定触发了
+$locationChangeStart事件，但触发了$locationChangeStart事件，不一定就会触发
+$locationChangeSuccess事件,因为这个事件同样也可以通过调用event.preventDefault方法进行
+取消。
+此外，$locationChangeSuccess事件中，也包含了evt、current、previous这3个参数，它们的含义
+与$locationChangeStart事件一致。

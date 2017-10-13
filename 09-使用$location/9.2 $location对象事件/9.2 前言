@@ -1,0 +1,4 @@
+当通过$location对象修改URL地址时，将会触发多个$location对象内置的事件，在改变URL地址前，
+将触发$locationChangeStart事件，该事件可以被preventDefault方法阻止，URL地址修改成功后，
+将触发$locationChangeSuccess事件。通过绑定这些事件，可以侦测用户的登陆和授权状态，并
+根据这些状态进行下一步操作。

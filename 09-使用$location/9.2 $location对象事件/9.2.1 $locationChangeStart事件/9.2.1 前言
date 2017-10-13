@@ -1,0 +1,5 @@
+Angular在地址栏中的URL发生变化之前，会触发$locationChangeStart事件。在这个事件中，
+$location服务将开始加载URL变化时各种所需的依赖，该事件在触发时带有3个参数，如下：
+1. evt对象，表示触发时原始的事件对象。
+2. current，表示当前的URL地址。
+3. previous，表示上一级的URL地址，若是首次加载，那么该值为undefined

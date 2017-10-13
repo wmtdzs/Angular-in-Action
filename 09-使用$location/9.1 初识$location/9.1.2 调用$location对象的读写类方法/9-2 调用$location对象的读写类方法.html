@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>调用$location对象的读写类方法</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame div {
+            margin: 3px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame" ng-controller="ctrl">
+        <div>页面地址：{{url}}</div>
+        <div>hash片段：{{hash}}</div>
+        <div>查询字符：{{search}}</div>
+        <div>页面路径：{{path}}</div>
+        <button ng-click="click_a()">修改</button>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .controller('ctrl', ['$scope', '$location', function($scope, $location) {
+                    $scope.url = $location.url('?a=1&b=2#hash').url();
+                    $scope.hash = $location.hash();
+                    $scope.search = $location.search();
+                    $scope.path = $location.path();
+                    $scope.click_a = function() {
+                        $scope.search = $location.search({c: 3, d: 4}).search();
+                    };
+                    /*
+                        在$location对象中，还有一个重要的方法--replace，其功能是取消浏览器
+                        导航条中“后退”按钮。如用户在表单提交后回退，便可以用此方法阻止用户
+                        回退。
+                    * */
+                }]);
+    </script>
+</body>
+</html>
