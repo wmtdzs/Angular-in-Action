@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>两种模式下分别获取页面URL中的内容</title>
+    <!-- 使用html5Mode，必须要加base -->
+    <base href="/">
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame div {
+            margin: 5px 0;
+        }
+        .frame .title {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .frame .show {
+            display: block;
+        }
+        .frame .hide {
+            display: none;
+        }
+        .frame .brow input {
+            width: 310px;
+            padding: 3px;
+            border: 1px solid #666;
+        }
+    </style>
+</head>
+<body data-ng-app="app">
+    <div class="frame" data-ng-controller="ctrl">
+        <div class="title">
+            <input type="radio" name="type" ng-click="rdo_click(true)" checked>Hashbang模式
+            <input type="radio" name="type" ng-click="rdo_click(false)">HTML5模式
+        </div>
+        <!--
+            本来module是无法嵌套的，此处用bootstrap初始化了两个module，
+            若嵌套，单独命名各自的控制器便无效了，必须将控制器名改为与父元素控制器名相同，但此处的控制器是独立于父元素的。
+        -->
+        <div ng-class="class_a">
+            <div id="hashbang" data-ng-controller="ctrl">
+                <base href="/">
+                <div ts-brow-bar bs="hashbang" class="brow"></div>
+                <div>hash片段：{{$location.hash()}}</div>
+                <div>查询字符：{{$location.search()}}</div>
+                <div>页面路径：{{$location.path()}}</div>
+                <a href="http://www.rttop.cn/a/c?a=b">/a/c?a=b</a>
+                <a href="http://www.rttop.cn/a/b/c?flag#hash">/a/b/c?flag#hash</a>
+            </div>
+        </div>
+        <div ng-class="class_b">
+            <div id="html5" data-ng-controller="ctrl">
+                <base href="/">
+                <div ts-brow-bar bs="html5" class="brow"></div>
+                <div>hash片段：{{$location.hash()}}</div>
+                <div>查询字符：{{$location.search()}}</div>
+                <div>页面路径：{{$location.path()}}</div>
+                <a href="http://www.rttop.cn/a/c?a=b">/a/c?a=b</a>
+                <a href="http://www.rttop.cn/a/b/c?flag#hash">/a/b/c?flag#hash</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="Angular-in-Action/JS/angular.js"></script>
+    <script type="text/javascript">
+        var id_name = 'hashbang';
+        var app = angular.module('app', []);
+
+        app.controller('ctrl', ['$rootScope', '$scope', function($rootScope, $scope) {
+            $scope.class_a = 'show';
+            $scope.class_b = 'hide';
+            $scope.rdo_click = function(e) {
+                if (e) {
+                    $scope.class_a = 'show';
+                    $scope.class_b = 'hide';
+                    id_name = 'hashbang';
+                } else {
+                    $scope.class_a = 'hide';
+                    $scope.class_b = 'show';
+                    id_name = 'html5';
+                }
+            }
+        }]);
+
+        function Brow(initUrl, baseHref) {
+            this.state = function() {
+                // angular1.5.8 中，必须重写此方法，代替元原有方法
+            };
+            this.$$checkUrlChange = function() {
+                // angular1.5.8 中，必须重写此方法，代替元原有方法
+            };
+            this.onUrlChange = function(fn) {
+                this.urlChange = fn;
+            };
+            this.url = function() {
+                return initUrl;
+            };
+            this.baseHref = function() {
+                return baseHref;
+            };
+        }
+        var Brows = {
+            hashbang: new Brow('http://www.rttop.cn/a/index.html#!/c?a=b#hash', '/a/index.html'),
+            html5: new Brow('http://www.rttop.cn/a/c?a=b#hash', '/a/index.html')
+        };
+
+        angular.module('hashbang_app', [])
+                .config(config)
+                .controller('ctrl',
+                        ['$scope', '$location', controller]
+                );
+
+        angular.module('html5_app', [])
+                .config(config)
+                .controller('ctrl',
+                        ['$scope', '$location', controller]
+                );
+
+        createBrow('hashbang', 'hashbang_app');
+        createBrow('html5', 'html5_app');
+
+        function createBrow(name, ctrlName) {
+            var root = angular.element(document.getElementById(name));
+            angular.bootstrap(root, [ctrlName]);
+        }
+
+        function controller($scope, $location) {
+            $scope.$location = $location;
+        }
+
+        function config($compileProvider, $locationProvider, $provide) {
+            $locationProvider.html5Mode(true).hashPrefix('!');
+            $provide.value('$browser', Brows[id_name]);
+            $provide.value('$document', angular.element(document.getElementById(id_name)));
+            $provide.value('$sniffer', {
+                history: name == 'html5'
+            });
+            $compileProvider.directive('tsBrowBar', function() {
+                return function (scope, element, attrs) {
+                    var bs = Brows[attrs.bs];
+                    var input = angular.element('<input type="text" />').val(bs.url());
+                    bs.url = function(url) {
+                        return input.val(url);
+                    };
+                    element.append(input);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

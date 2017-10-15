@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>解决双大括号绑定元素时的闪烁问题</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame div {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div data-ng-controller="ctrl" class="frame">
+        <!--
+            添加ng-cloak指令后，页面头部会新增css样式。
+            通过这段样式，Angular会将带有“ng-cloak”属性的元素进行隐藏，
+            即将它的“display”属性设置为“none”。
+            通过这样的设置，元素在正式被Angular解析和渲染之前是隐藏的，
+            直到Angular解析带有“ng-cloak”属性的元素时，才将其“ng-cloak”
+            属性和样式全部移除。内部代码如下：
+            var ngCloakDirective = ngDirective({
+                compile: function(element, attr) {
+                    attr.$set('ngCloak', undefined);
+                    element.removeClass('ng-cloak');
+                }
+            });
+        -->
+        <div id="template" data-ng-cloak>{{message}}</div>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .controller('ctrl', ['$scope', function($scope) {
+                    $scope.message = 'Hello,Angular';
+                }]);
+    </script>
+</body>
+</html>

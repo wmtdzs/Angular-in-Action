@@ -28,7 +28,9 @@
     <script type="text/javascript">
         angular.module('app', [])
                 .controller('ctrl', ['$scope', '$location', function($scope, $location) {
-                    $scope.url = $location.url('?a=1&b=2#hash').url();
+                    $location.path('/a');
+                    $location.search({a: 1, b: 2});
+                    $scope.url = $location.url();
                     $scope.hash = $location.hash();
                     $scope.search = $location.search();
                     $scope.path = $location.path();

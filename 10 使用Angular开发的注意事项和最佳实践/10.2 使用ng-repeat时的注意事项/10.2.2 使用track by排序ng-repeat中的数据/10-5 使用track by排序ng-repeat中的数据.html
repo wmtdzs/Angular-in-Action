@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用track by排序ng-repeat中的数据</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        .frame ul li {
+            height: 28px;
+            line-height: 28px;
+        }
+        .frame ul li span {
+            float: left;
+            width: 50px;
+        }
+    </style>
+</head>
+<body data-ng-app="app">
+    <div data-ng-controller="ctrl" class="frame">
+        <button data-ng-click="update()">更新</button>
+        <!--
+            若没有track by，则每一个对象中会包含一个$$hashkey属性。
+            当单击更新按钮时，初始化数据的DOM元素将全部被删除，并重新生成与初始化数据
+            结构一样的DOM元素来加载和渲染新获取的数据。
+            出现这种情况，根源在于每次替换数据源时，都会导致ng-repeat指令为每一个数据元素
+            自动生成一个全新的字符型Key值，这个值由Angular内部的nextUid方法以自增的方式生成，
+            因此，缺少标识DOM的唯一属性，导致每次更新时，没有办法重用原有的DOM元素。只能
+            反复重新生成。
+            为了解决这种情况，首先在数据源中尽可能增加一个唯一标识的属性，如本例中的ID号，
+            然后，在绑定数据源时，调用track by表达式指定排序的属性名，通过这种方式将会删除
+            自动添加的字符型Key值，使DOM元素有了唯一的标识属性，因此，当下次进行数据更新时，
+            将会自动调用这些已有的DOM元素，从而加快页面渲染和加载速度。
+        -->
+        <ul>
+            <li data-ng-repeat="user in users track by user.id">
+                <span>{{user.id}}</span>
+                <span>{{user.name}}</span>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .controller('ctrl', ['$scope', function($scope) {
+                    var users = [{
+                        id: 1010, name: '张立秋', score: 10
+                    }, {
+                        id: 1020, name: '李山浃', score: 20
+                    }, {
+                        id: 1030, name: '胡正清', score: 30
+                    }];
+
+                    $scope.users = users;
+                    console.log($scope.users);
+                    $scope.update = function() {
+                        // 从服务器获取数据
+                        var result = [{
+                            id: 1040, name: '刘三夫', score: 40
+                        }, {
+                            id: 1050, name: '闻钟华', score: 50
+                        }, {
+                            id: 1060, name: '钱少忠', score: 60
+                        }];
+                        $scope.users = result;
+                        console.log($scope.users);
+                    }
+                }]);
+    </script>
+</body>
+</html>

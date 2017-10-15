@@ -1,0 +1,3 @@
+在调用ng-repeat指令显示数据时，ng-repeat在新建DOM元素时，也为每个新建的DOM元素创建了独立的scope作用域。
+虽然如此，但它们的父级scope作用域是相同的，都是构建控制器时注入的$scope对象，调用angular.element(domElement).scope方法
+可以获取某个DOM所对应的作用域，通过某个元素的作用域又可以访问到它的父级作用域，从而修改绑定的数据源。

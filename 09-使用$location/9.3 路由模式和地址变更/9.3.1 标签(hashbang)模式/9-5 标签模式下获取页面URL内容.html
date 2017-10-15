@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>标签模式下获取页面URL中的内容</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame div {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame" ng-controller="ctrl">
+        <div>查询字符：{{search}}</div>
+        <div>页面路径：{{path}}</div>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .config(function($locationProvider) {
+                    $locationProvider.html5Mode(false);
+                    $locationProvider.hashPrefix('!!');
+                })
+                .controller('ctrl',
+                        ['$scope', '$location',
+                            function($scope, $location) {
+                                $location.search({'b': 2,'c': 3});
+                                $location.path('/a');
+                                /*
+                                 自定义的“!!”字符不属于path方法获取的内容
+                                 它实质上是hash的前缀，与“hash”组成另外一个部分
+                                 因此不能使用path()获取
+                                * */
+                                $scope.path = $location.path();
+                                $scope.search = $location.search();
+                            }
+                        ]
+
+                );
+    </script>
+</body>
+</html>

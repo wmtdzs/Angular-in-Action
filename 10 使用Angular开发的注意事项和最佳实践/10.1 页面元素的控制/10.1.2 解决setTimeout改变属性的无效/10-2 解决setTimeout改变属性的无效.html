@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解决setTimeout改变属性的无效</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame + .frame {
+            margin-top: 5px;
+        }
+        .frame p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div data-ng-app="app" data-ng-controller="ctrl" class="frame">
+        <p>{{title}}</p>
+        <p>{{ tip }}</p>
+        <p>{{ tip_1 }}</p>
+        <p>{{ tip_2 }}</p>
+    </div>
+    <div id="app_1" class="frame" data-ng-controller="ctrl_1">
+        <p>{{ tip }}</p>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .controller('ctrl', ['$scope', '$timeout', function($scope, $timeout) {
+                    $scope.title = '同步过程：尚未同步';
+                    $scope.tip = "Hello,Angular!";
+                    $scope.tip_1 = "Hello,Angular!!";
+                    $scope.tip_2 = "Hello,Angular!!!";
+                    // 错误写法
+                    setTimeout(function() {
+                        $scope.tip = '欢迎来到angular的世界';
+                    }, 2 * 1000);
+
+                    // 正确写法1
+                    /*
+                        $scope.$apply的同步是同步整个module的变量，所以在第一次同步时，
+                        $scope.tip变量也会发生改变
+                    * */
+                    setTimeout(function() {
+                        $scope.$apply(function() {
+                            $scope.title = '同步过程：第一次同步';
+                            $scope.tip_1 = '欢迎来到angular的世界！';
+                        });
+                        // 也可以使用以下写法
+                        // $scope.tip_1 = '欢迎来到angular的世界！';
+                        // $scope.$apply();
+                    }, 3 * 1000);
+
+                    // 正确写法2
+                    /*
+                        $timeout服务中也会调用$apply()方法，
+                        所以整个module中的$scope变量会同步两次
+                    * */
+                    $timeout(function() {
+                        $scope.title = '同步过程：第二次同步';
+                        $scope.tip_2 = '欢迎来到angular的世界！！';
+                    }, 4 * 1000);
+                }]);
+
+        angular.module('otherApp', [])
+                .controller('ctrl_1', ['$scope', function($scope) {
+                    $scope.tip = '不会同步，因为这个变量是另一个module中的值';
+
+                    // 错误的写法
+                    setTimeout(function() {
+                        $scope.tip = '永远不会执行';
+                    }, 1000);
+                }]);
+        angular.bootstrap(returnModuleName('app_1'), ['otherApp']);
+
+        function returnModuleName(appName) {
+            return angular.element(document.getElementById(appName));
+        }
+    </script>
+</body>
+</html>

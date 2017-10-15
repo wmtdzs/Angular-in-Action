@@ -1,0 +1,17 @@
+标签(hashbang)模式是Angular默认使用的浏览器模式，它是HTML5模式的一个降级方案，
+用于满足一些不支持HTML5模式的浏览器使用。在使用标签模式时，URL将以一个“#”符号
+开头，后面紧跟一个“!”符号，表明这是一种标签模式，这个默认的“!”符号可以通过
+hashPrefix属性进行重置，由于标签模式不会重新加载URL请求，因此，这种模式不需要
+服务端的支持。
+虽然标签(hashbang)模式是浏览器默认的路由模式，但也可以调用配置方法，通过注入的
+$locationProvider对象中的html5Mode方法进行自定义设置，格式如下：
+    $locationProvider.html5Mode(boolean || obj)
+上述代码中，html5Mode方法支持两种方式设置格式，一种是布尔类型，当方法的括号中
+添加一个布尔值“true”时，表示支持HTML5模式，添加“false”时，表示为默认的标签
+模式；另外一种是JSON对象类型，在方法的括号中添加“{enabled:true}”时，表示支持
+HTML5模式，添加“{enabled:false}”时，表示为默认的标签模式。
+除了调用$locationProvider对象中的html5Mode方法配置浏览器的路由模式外，还可以调用
+对象中的hashPrefix方法自定义标签模式中的bang标识符，格式如下：
+    $locationProvider.hashPrefix(strBangName);
+上述代码中，方法中的参数strBangName就是标签模式中的bang标识符，在默认情况下，该
+字符的值为空，可以通过改变你strBangName参数的值来自定义bang标识符的内容。

@@ -1,0 +1,9 @@
+在JavaScript中，setTimeout是window对象中的一个方法，它的功能是在指定的时间之后，
+执行相对应的函数表达式。但在Angular中，若想使用setTimeout方法来同步属性值时，则
+不能达到相应的效果，这是由于在Angular中，大部分操作之后的效果都由$apply方法自动
+在页面中完成，若调用了非Angular中的方法或函数，如setTimeout方法，那么系统就不会
+调用$apply方法在页面中同步操作结果，导致该方法执行后，并未改变页面中的对应属性值。
+
+因此，要解决调用setTimeout方法不能同步属性值的情况，只需要在setTimeout方法中，将
+执行的函数或表达式包含在$apply方法中或者直接调用与setTimeout方法对应的$timeout服务，
+这样就可以直接在页面中同步函数或表达式操作后的效果。

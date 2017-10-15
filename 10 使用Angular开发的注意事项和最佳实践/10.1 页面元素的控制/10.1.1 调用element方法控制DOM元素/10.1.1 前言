@@ -1,0 +1,5 @@
+在使用Angular框架开发应用时，尽量不要直接通过JavaScript代码直接操作DOM元素，也不要
+引入jQuery框架来操作DOM元素，而是通过Angular内部的jQLite来操作，代码如下：
+    angular.element(element);
+在上述代码中，形参element的类型为字符型，它的值是一个字符串或DOM元素，它的功能是调用
+Angular内部的jQLite库，返回一个jQuery对象。

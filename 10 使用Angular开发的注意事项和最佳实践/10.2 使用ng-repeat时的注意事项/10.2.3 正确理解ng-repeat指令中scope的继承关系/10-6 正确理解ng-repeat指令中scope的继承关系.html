@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正确理解ng-repeat指令中scope的继承关系</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        .frame ul li {
+            height: 28px;
+            line-height: 28px;
+        }
+        .frame ul li span {
+            float: left;
+            width: 50px;
+        }
+    </style>
+</head>
+<body data-ng-app="app">
+    <div data-ng-controller="ctrl" class="frame">
+        <input type="button" value="按钮1" ng-click="change1()">
+        <input type="button" value="按钮2" ng-click="change2()">
+        <input type="button" value="按钮3" ng-click="change3()">
+        <ul>
+            <li data-ng-repeat="user in users track by user.id">
+                <span id="span{{user.id}}">{{user.id}}</span>
+                <span id="span{{user.id}}">{{user.name}}</span>
+                <span id="span{{user.id}}">{{user.score}}</span>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript" src="../../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .controller('ctrl', ['$scope', function($scope) {
+                    $scope.users = [{
+                        id: 1010, name: '张立秋', score: 10
+                    }, {
+                        id: 1020, name: '李山浃', score: 20
+                    }, {
+                        id: 1030, name: '胡正清', score: 30
+                    }];
+
+                    $scope.change1 = function() {
+                        var scope1 = angular.element(document.getElementById('span1010')).scope();
+                        var scope2 = angular.element(document.getElementById('span1020')).scope();
+                        /*
+                            由于ng-repeat指令在新创建元素时，对应的作用域是相互独立的，因此控制台输出false值
+                        * */
+                        console.log(scope1 == scope2); // false
+                    };
+
+                    $scope.change2 = function() {
+                        var scope = angular.element(document.getElementById('span1020')).scope();
+                        // 由于列表中单个独立元素的父级作用域是控制器在构建时注入的$scope对象，因此输出true
+                        console.log(scope.$parent == $scope); // true
+                    };
+
+                    $scope.change3 = function() {
+                        var scope = angular.element(document.getElementById('span1030')).scope();
+                        // 将scope.$parent(也就是$scope)的users属性修改
+                        scope.$parent.users = [{
+                            id: 1040, name: '刘三夫', score: 40
+                        }, {
+                            id: 1050, name: '闻钟华', score: 50
+                        }, {
+                            id: 1060, name: '钱少忠', score: 60
+                        }];
+                    };
+                }]);
+    </script>
+</body>
+</html>
