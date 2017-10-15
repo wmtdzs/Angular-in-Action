@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解决ng-if中ng-model值无效的问题</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame div {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body data-ng-app="app">
+    <div data-ng-controller="ctrl" class="frame">
+        <div>
+            a的值：{{a}}<br>
+            b的值：{{b}}
+        </div>
+        <div>
+            普通方式：<input type="checkbox" data-ng-model="a">
+        </div>
+        <!--
+            在ng-if中，每个包含的元素都有自己的作用域，因此，复选框元素也拥有自己的$scope作用域。
+            相对于控制器作用域来说，这个作用域属于一个子级作用域，所以，如果想绑定控制器中的变量，
+            必须添加$parent标识，只有这样才能访问到控制器中的变量。
+            因此，解决ng-if中ng-model无效问题，主要方法就是绑定值时添加$parent标识，或者使用ng-show
+            指令代替ng-if，这两种方法都可以达到页面效果。
+        -->
+        <div data-ng-if="!a">
+            ngIf方式：<input type="checkbox" data-ng-model="$parent.b">
+        </div>
+    </div>
+    <script type="text/javascript" src="../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .controller('ctrl', ['$scope', function($scope) {
+                    $scope.a = false;
+                    $scope.b = false;
+                }])
+    </script>
+</body>
+</html>

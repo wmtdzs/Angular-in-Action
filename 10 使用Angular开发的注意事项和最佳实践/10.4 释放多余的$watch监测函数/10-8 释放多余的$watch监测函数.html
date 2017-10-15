@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>释放多余的$watch监测函数</title>
+    <style type="text/css">
+        .frame {
+            padding: 5px 8px;
+            margin: 0;
+            font-size: 12px;
+            width: 320px;
+            background-color: #eee;
+        }
+        .frame button,
+        .frame div
+        {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body data-ng-app="app">
+    <div data-ng-controller="ctrl" class="frame">
+        <input type="text" data-ng-model="content">
+        <div>第{{num}}次数据变化</div>
+        <button ng-click="stopWatch()">停止监测</button>
+    </div>
+    <script type="text/javascript" src="../../JS/angular.min.js"></script>
+    <script type="text/javascript">
+        angular.module('app', [])
+                .controller('ctrl', ['$scope', function($scope) {
+                    $scope.num = 0;
+
+                    /*
+                        由于输入框元素通过ng-model指令实现了值的双向绑定，因此，Angular将会
+                        通过$watch监测“content”的变化，即自动执行$scope.$watch方法，调用格式如下：
+                        $watch(watchExpression, listener, objectEquality);
+                        在$watch方法的调用格式中，第一个参数为字符型，表示需要监测的表达式；
+                        第二个参数为函数，当监测的表达式发生变化后，第二个参数对应的函数会自动执行，
+                        当判断函数中两个参数newValue和oldValue的值是否相等时，会以递归的方式调用
+                        angular.equals方法去修改数据，并一直检查到没有修改为止。
+                    * */
+                    var contentWatch = $scope.$watch('content', function(newVal, oldVal) {
+                        /*
+                            当页面加载完成时，$watch函数将会被首次执行。为了使首次监测时不进行累计次数，
+                            根据首次执行函数newValue和oldValue的值都为“undefined”的特征，即两者此时
+                            拥有相同的值，若相同，则调用return语句，退出累计。
+                        * */
+                        if (newVal === oldVal) {
+                            return;
+                        }
+                        $scope.num++;
+                    });
+
+                    /*
+                        当点击停止监测按钮时，会调用contentWatch方法，而这个方法对应的就是$watch函数的返回值，
+                        即返回一个释放$watch绑定的unbind函数，最终实现停止监测效果。
+                    * */
+                    $scope.stopWatch = function() {
+                        contentWatch();
+                    };
+                }]);
+    </script>
+</body>
+</html>

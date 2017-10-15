@@ -2,32 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2099f473-0a7d-43f9-b306-93f0433e9e80" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.1 标签(hashbang)模式/9-5 标签模式下获取页面URL内容.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.1 标签(hashbang)模式/9.3.1 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.2 HTMl5模式/9-6 HTML5模式下获取页面URL中的内容.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.2 HTMl5模式/9.3.2 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.3 模式间的区别于关联/9-7 两种模式下分别获取页面URL中的内容.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.3 模式间的区别于关联/9.3.3 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.4 路由对象方法的双向绑定/9-8 路由对象方法的双向绑定.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/09-使用$location/9.3 路由模式和地址变更/9.3.4 路由对象方法的双向绑定/9.3.4 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.1 页面元素的控制/10.1 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.1 页面元素的控制/10.1.1 调用element方法控制DOM元素/10-1 调用element方法控制DOM元素.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.1 页面元素的控制/10.1.1 调用element方法控制DOM元素/10.1.1 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.1 页面元素的控制/10.1.2 解决setTimeout改变属性的无效/10-2 解决setTimeout改变属性的无效.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.1 页面元素的控制/10.1.2 解决setTimeout改变属性的无效/10.1.2 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.1 页面元素的控制/10.1.3 解决双大括号绑定元素时的闪烁问题/10-3 解决双大括号绑定元素时的闪烁问题.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.1 页面元素的控制/10.1.3 解决双大括号绑定元素时的闪烁问题/10.1.3 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.1 注意ng-repeat中的索引号/10-4 注意ng-repeat中的索引号.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.1 注意ng-repeat中的索引号/10.2.1 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.2 使用track by排序ng-repeat中的数据/10-5 使用track by排序ng-repeat中的数据.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.2 使用track by排序ng-repeat中的数据/10.2.2 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.3 正确理解ng-repeat指令中scope的继承关系/10-6 正确理解ng-repeat指令中scope的继承关系.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.3 正确理解ng-repeat指令中scope的继承关系/10.2.3 前言" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/JS/angular.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.3 解决单击按钮中的冒泡现象/10-7 解决单击按钮事件中的冒泡现象.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.3 解决单击按钮中的冒泡现象/10.3 前言" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.4 释放多余的$watch监测函数/10-8 释放多余的$watch监测函数.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.4 释放多余的$watch监测函数/10.4 前言" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 前言" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 解决ng-if中ng-model值无效的问题.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/09-使用$location/9.1 初识$location/9.1.2 调用$location对象的读写类方法/9-2 调用$location对象的读写类方法.html" afterPath="$PROJECT_DIR$/09-使用$location/9.1 初识$location/9.1.2 调用$location对象的读写类方法/9-2 调用$location对象的读写类方法.html" />
     </list>
     <ignored path="Angular in Action.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,7 +28,38 @@
     <favorites_list name="Angular in Action" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
+      <file leaf-file-name="10-8 释放多余的$watch监测函数.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.4 释放多余的$watch监测函数/10-8 释放多余的$watch监测函数.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-16.153847">
+              <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="10.5 前言" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 前言">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="10.5 解决ng-if中ng-model值无效的问题.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 解决ng-if中ng-model值无效的问题.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.46153846">
+              <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -65,13 +77,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1.2 设置指令对象的基础属性/tpl.html" />
-        <option value="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.1 指令对象中的transclude属性/8.2.1 前言" />
-        <option value="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.1 指令对象中的transclude属性/8-3 设置指令对象中的transclude属性.html" />
-        <option value="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.2 指令对象中的link属性/8.2.2 前言" />
-        <option value="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.2 指令对象中的link属性/8-4 设置指令对象中的link属性.html" />
-        <option value="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.3 指令对象中的compile属性/8.2.3 前言" />
-        <option value="$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.3 指令对象中的compile属性/8-5 设置指令对象中的compile属性.html" />
         <option value="$PROJECT_DIR$/08-Angular的指令/8.3 Angular指令对象的scope属性/8.3.1 scope属性是布尔值/8.3.1 前言" />
         <option value="$PROJECT_DIR$/08-Angular的指令/8.3 Angular指令对象的scope属性/8.3.1 scope属性是布尔值/8-6 scope属性是布尔值.html" />
         <option value="$PROJECT_DIR$/08-Angular的指令/8.3 Angular指令对象的scope属性/8.3.2/8.3.2.html" />
@@ -116,6 +121,13 @@
         <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.3 正确理解ng-repeat指令中scope的继承关系/10.2.3 前言" />
         <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.2 使用track by排序ng-repeat中的数据/10-5 使用track by排序ng-repeat中的数据.html" />
         <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.2 使用ng-repeat时的注意事项/10.2.3 正确理解ng-repeat指令中scope的继承关系/10-6 正确理解ng-repeat指令中scope的继承关系.html" />
+        <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.3 解决单击按钮中的冒泡现象/10.3 前言" />
+        <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.3 解决单击按钮中的冒泡现象/test.html" />
+        <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.3 解决单击按钮中的冒泡现象/10-7 解决单击按钮事件中的冒泡现象.html" />
+        <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.4 释放多余的$watch监测函数/10.4 前言" />
+        <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.4 释放多余的$watch监测函数/10-8 释放多余的$watch监测函数.html" />
+        <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 前言" />
+        <option value="$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 解决ng-if中ng-model值无效的问题.html" />
       </list>
     </option>
   </component>
@@ -185,6 +197,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="JS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Angular in Action" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Angular-in-Action" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="10 使用Angular开发的注意事项和最佳实践" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="10.5 解决ng-if中ng-model值无效的问题" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -307,9 +337,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1046" extended-state="7" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24099576" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24099576" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990867" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32990867" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -344,48 +374,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/08-Angular的指令/8.1 Angular指令概述/8.1.2 设置指令对象的基础属性/8-2 设置指令对象的基础属性.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26923078">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.1 指令对象中的transclude属性/8.2.1 前言">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5494506">
-          <caret line="15" column="48" selection-start-line="15" selection-start-column="48" selection-end-line="15" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.2 指令对象中的link属性/8.2.2 前言">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.1 指令对象中的transclude属性/8-3 设置指令对象中的transclude属性.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.846154">
-          <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.2 指令对象中的link属性/8-4 设置指令对象中的link属性.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.128205">
-          <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.3 指令对象中的compile属性/8.2.3 前言">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/08-Angular的指令/8.2 Angular指令对象的重要属性/8.2.3 指令对象中的compile属性/8-5 设置指令对象中的compile属性.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2455243">
@@ -737,6 +725,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5">
           <caret line="70" column="62" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.3 解决单击按钮中的冒泡现象/10.3 前言">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14652015">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.3 解决单击按钮中的冒泡现象/10-7 解决单击按钮事件中的冒泡现象.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42307693">
+          <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.4 释放多余的$watch监测函数/10.4 前言">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21978022">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.4 释放多余的$watch监测函数/10-8 释放多余的$watch监测函数.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.153847">
+          <caret line="55" column="60" selection-start-line="55" selection-start-column="60" selection-end-line="55" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 前言">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/10 使用Angular开发的注意事项和最佳实践/10.5 解决ng-if中ng-model值无效的问题/10.5 解决ng-if中ng-model值无效的问题.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46153846">
+          <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
           <folding />
         </state>
       </provider>
